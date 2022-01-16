@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 public class PrintCheck {
-    public static void printCheckConsole(Integer productAmount, Product product, BigDecimal finalPrice) {
+    public static void printCheckConsole(Product product, BigDecimal finalPrice, Long productAmount) {
         System.out.println(
                 productAmount + "  " +
                         product.getName() + "   " +
@@ -26,7 +26,7 @@ public class PrintCheck {
         System.out.println("        Total:                   " + total);
     }
 
-    public static void printCheckFile(String fileName, Integer productAmount, Product product, BigDecimal finalPrice) throws IOException {
+    public static void printCheckFile(String fileName, Product product, BigDecimal finalPrice, Long productAmount) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
         String content = String.join("\n",
                 productAmount + "  " +

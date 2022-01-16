@@ -10,8 +10,8 @@ import java.util.Objects;
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    Integer discount;
+    private Long id;
+    private Integer discount;
 
     public Card() {
     }

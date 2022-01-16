@@ -1,12 +1,11 @@
 package com.gmail.arthurstrokov.printcheck.util;
 
 import com.gmail.arthurstrokov.printcheck.model.Product;
+import com.gmail.arthurstrokov.printcheck.model.Sell;
 import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
+import com.gmail.arthurstrokov.printcheck.repository.SellRepository;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -14,31 +13,21 @@ import java.util.List;
 
 @Service
 public class SumCalculation {
-    public static void sumCalculation(List<String> checkInValues, Integer sizeCheckIn, ProductRepository productRepository, Integer cardDiscount) throws IOException {
+
+    public static void sumCalculation(List<String> checkInValues, Integer sizeCheckIn, ProductRepository productRepository, Integer cardDiscount, SellRepository sellRepository) {
         BigDecimal cost = BigDecimal.ZERO;
         BigDecimal percent = BigDecimal.ZERO;
-
-        boolean success = (new File("check.txt")).delete();
-
-        BufferedWriter out = null;
-        try {
-            out = new BufferedWriter(new FileWriter("check.txt"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        assert out != null;
-        out.write("cty: name:    price: finalPrice: total: \n");
-        out.close();
 
         for (int i = 0; i < sizeCheckIn; i++) {
             String productInCheck = checkInValues.get(i);
             String[] parts = productInCheck.split("-");
             String productId = parts[0];
-            int productAmount = Integer.parseInt((parts[1]));
+            long productAmount = Integer.parseInt((parts[1]));
 
             Product product = productRepository.findById(Integer.parseInt(productId));
             int productDiscount = product.getDiscount();
             BigDecimal productPrice = product.getPrice();
+            String productName = product.getName();
 
             if (productAmount >= 5) {
                 BigDecimal productPriceDiscount = productPrice
@@ -50,10 +39,18 @@ public class SumCalculation {
             BigDecimal finalPrice = productPrice;
             cost = cost.add(productPrice.multiply(BigDecimal.valueOf(productAmount)));
 
-            PrintCheck.printCheckConsole(productAmount, product, finalPrice);
+            Sell sell = new Sell();
+            sell.setProduct(product);
+            sell.setAmount(productAmount);
+            sellRepository.save(sell);
+
+            Iterable<Sell> sells = sellRepository.findAllByProductId(Long.valueOf(productId));
+            System.out.println(sells);
+
+            PrintCheck.printCheckConsole(product, finalPrice, productAmount);
 
             try {
-                PrintCheck.printCheckFile("check.txt", productAmount, product, finalPrice);
+                PrintCheck.printCheckFile("check.txt", product, finalPrice, productAmount);
             } catch (IOException e) {
                 e.printStackTrace();
             }

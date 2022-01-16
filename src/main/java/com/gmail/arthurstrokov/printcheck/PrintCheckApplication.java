@@ -4,6 +4,7 @@ import com.gmail.arthurstrokov.printcheck.model.Card;
 import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.repository.CardRepository;
 import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
+import com.gmail.arthurstrokov.printcheck.repository.SellRepository;
 import com.gmail.arthurstrokov.printcheck.service.InputService;
 import com.gmail.arthurstrokov.printcheck.util.GetCardDiscount;
 import com.gmail.arthurstrokov.printcheck.util.SumCalculation;
@@ -15,6 +16,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.file.Path;
@@ -35,8 +40,11 @@ public class PrintCheckApplication {
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx,
                                                ProductRepository productRepository,
-                                               CardRepository cardRepository) {
+                                               CardRepository cardRepository,
+                                               SellRepository sellRepository) {
         return args -> {
+            boolean success = (new File("check.txt")).delete();
+            log.info(String.valueOf(success));
             // Create some Card/Product objects, add them in DB
             Random rn = new Random();
             for (long i = 0; i < 5; i++) {
@@ -59,8 +67,19 @@ public class PrintCheckApplication {
             if (cardDiscount > 0) {
                 sizeCheckIn = sizeCheckIn - 1;
             }
+
+            System.out.println("cty: name:    price: finalPrice: total: ");
+            BufferedWriter out = new BufferedWriter(new FileWriter("check.txt"));
+            try {
+                out = new BufferedWriter(new FileWriter("check.txt"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            out.write("cty: name:    price: finalPrice: total: \n");
+            out.close();
+
             // Count products price sum
-            SumCalculation.sumCalculation(checkIn, sizeCheckIn, productRepository, cardDiscount);
+            SumCalculation.sumCalculation(checkIn, sizeCheckIn, productRepository, cardDiscount, sellRepository);
         };
     }
 }

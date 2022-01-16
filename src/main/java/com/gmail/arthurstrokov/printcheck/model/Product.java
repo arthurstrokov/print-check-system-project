@@ -1,20 +1,20 @@
 package com.gmail.arthurstrokov.printcheck.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String name;
-    Integer discount;
-    BigDecimal price;
+    private Long id;
+    private String name;
+    private Integer discount;
+    private BigDecimal price;
+    @OneToMany
+    private Set<Sell> sells;
 
     public Product() {
     }
@@ -55,6 +55,14 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Set<Sell> getSells() {
+        return sells;
+    }
+
+    public void setSells(Set<Sell> sells) {
+        this.sells = sells;
     }
 
     @Override
