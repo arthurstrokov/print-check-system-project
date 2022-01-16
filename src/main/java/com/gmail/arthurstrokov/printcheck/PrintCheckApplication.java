@@ -4,7 +4,8 @@ import com.gmail.arthurstrokov.printcheck.model.Card;
 import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.repository.CardRepository;
 import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
-import com.gmail.arthurstrokov.printcheck.util.PrintCheck;
+import com.gmail.arthurstrokov.printcheck.util.GetCardDiscount;
+import com.gmail.arthurstrokov.printcheck.util.SumCalculation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -19,8 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @SpringBootApplication
 public class PrintCheckApplication {
@@ -54,57 +53,13 @@ public class PrintCheckApplication {
             List<String> checkIn = new ArrayList<>(Arrays.asList(input.split(" ")));
             int sizeCheckIn = checkIn.size();
             // If card exists, get discount
-            int cardDiscount = 0;
-            Pattern pattern = Pattern.compile("card*");
-            for (String card : checkIn
-            ) {
-                Matcher matcher = pattern.matcher(card);
-                boolean matchFound = matcher.find();
-                if (matchFound) {
-                    sizeCheckIn = checkIn.size() - 1;
-                    String presentedCard = checkIn.get(checkIn.size() - 1);
-                    String[] part = presentedCard.split("-");
-                    String cardId = part[1];
-                    Card availableCard = cardRepository.findById(Long.parseLong(cardId));
-                    cardDiscount = availableCard.getDiscount();
-                }
-            }
-
-            System.out.println("cty: name:    price: finalPrice: total: ");
-            // Count products price sum
-            BigDecimal cost = BigDecimal.ZERO;
-            BigDecimal total = BigDecimal.ZERO;
-
-            for (int i = 0; i < sizeCheckIn; i++) {
-                String productInCheck = checkIn.get(i);
-                String[] parts = productInCheck.split("-");
-                String productId = parts[0];
-                Product product = productRepository.findById(Integer.parseInt(productId));
-
-                BigDecimal productPrice = product.getPrice();
-                int productDiscount = product.getDiscount();
-                int productAmount = Integer.parseInt((parts[1]));
-
-                if (productAmount >= 5) {
-                    BigDecimal productPriceDiscount = productPrice
-                            .multiply(BigDecimal.valueOf(productDiscount))
-                            .divide(BigDecimal.valueOf(100), RoundingMode.DOWN);
-                    productPrice = productPrice.subtract(productPriceDiscount);
-                }
-
-                BigDecimal finalPrice = productPrice;
-                cost = cost.add(productPrice.multiply(BigDecimal.valueOf(productAmount)));
-
-                PrintCheck.printCheckConsole(productAmount, product, finalPrice);
-            }
-
-            BigDecimal percent = BigDecimal.ZERO;
+            Integer cardDiscount = GetCardDiscount.getCardDiscount(checkIn, cardRepository);
             if (cardDiscount > 0) {
-                percent = cost.multiply(BigDecimal.valueOf(cardDiscount)).divide(BigDecimal.valueOf(100), RoundingMode.DOWN);
+                sizeCheckIn = sizeCheckIn - 1;
             }
-            total = cost.subtract(percent);
-
-            PrintCheck.printTotalConsole(cardDiscount, cost, percent, total);
+            // Count products price sum
+            System.out.println("cty: name:    price: finalPrice: total: ");
+            SumCalculation.sumCalculation(checkIn, sizeCheckIn, productRepository, cardDiscount);
         };
     }
 }
