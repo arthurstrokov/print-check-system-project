@@ -4,6 +4,7 @@ import com.gmail.arthurstrokov.printcheck.model.Card;
 import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.repository.CardRepository;
 import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
+import com.gmail.arthurstrokov.printcheck.service.InputService;
 import com.gmail.arthurstrokov.printcheck.util.GetCardDiscount;
 import com.gmail.arthurstrokov.printcheck.util.SumCalculation;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,7 +41,7 @@ public class PrintCheckApplication {
             Random rn = new Random();
             for (long i = 0; i < 5; i++) {
                 cardRepository.save(new Card(
-                        rn.nextInt(10) + 1));
+                        rn.nextInt(5) + 1));
             }
             for (long i = 0; i < 10; i++) {
                 productRepository.save(new Product(
@@ -48,7 +50,7 @@ public class PrintCheckApplication {
                         BigDecimal.valueOf(Math.random()).setScale(2, RoundingMode.DOWN)));
             }
             // Take values from somewhere
-            String input = "4-3 2-1 9-2 8-4 8-5 1-4 card-3";
+            String input = InputService.readFrom(Path.of("demo.txt"));
             // Add values to list
             List<String> checkIn = new ArrayList<>(Arrays.asList(input.split(" ")));
             int sizeCheckIn = checkIn.size();
@@ -58,7 +60,6 @@ public class PrintCheckApplication {
                 sizeCheckIn = sizeCheckIn - 1;
             }
             // Count products price sum
-            System.out.println("cty: name:    price: finalPrice: total: ");
             SumCalculation.sumCalculation(checkIn, sizeCheckIn, productRepository, cardDiscount);
         };
     }
