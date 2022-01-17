@@ -37,25 +37,36 @@ public class SaleCalculationService {
             long productSalesAmount = Integer.parseInt((parts[1]));
 
             Product product = productRepository.findById(Integer.parseInt(productId));
-            BigDecimal productDiscountPercentage = product.getProductDiscountPercentage();
-            BigDecimal productPrice = product.getProductPrice();
-            BigDecimal productPriceDiscount = productPrice.multiply(productDiscountPercentage).divide(BigDecimal.valueOf(100), 2, RoundingMode.DOWN);
 
-            BigDecimal productSalesPrice;
-            if (productSalesAmount > 4) {
-                productSalesPrice = productPrice.subtract(productPriceDiscount);
-            } else {
-                productSalesPrice = productPrice;
-            }
-
-            Sale sale = new Sale();
-            sale.setProduct(product);
-            sale.setProductSalesPrice(productSalesPrice);
-            sale.setProductSalesAmount(productSalesAmount);
+            Sale sale = saleProduct(product, productSalesAmount);
             saleList.add(sale);
-            saleRepository.save(sale);
         }
         return saleList;
+    }
+
+    public Sale saleProduct(Product product, Long productSalesAmount) {
+        Sale sale = new Sale();
+        BigDecimal productSalesTotalPrice = BigDecimal.ZERO;
+
+        BigDecimal productDiscountPercentage = product.getProductDiscountPercentage();
+        BigDecimal productPrice = product.getProductPrice();
+        BigDecimal productPriceDiscount = productPrice.multiply(productDiscountPercentage).divide(BigDecimal.valueOf(100), 2, RoundingMode.DOWN);
+
+        BigDecimal productSalesPrice;
+        if (productSalesAmount > 4) {
+            productSalesPrice = productPrice.subtract(productPriceDiscount);
+        } else {
+            productSalesPrice = productPrice;
+        }
+
+        productSalesTotalPrice = productSalesTotalPrice.add(product.getProductPrice()).multiply(BigDecimal.valueOf(productSalesAmount));
+
+        sale.setProduct(product);
+        sale.setProductSalesPrice(productSalesPrice);
+        sale.setProductSalesAmount(productSalesAmount);
+        sale.setProductSalesTotalPrice(productSalesTotalPrice);
+        saleRepository.save(sale);
+        return sale;
     }
 
     public void totalCalculation(List<Sale> saleList, BigDecimal cardDiscount) {
@@ -64,7 +75,7 @@ public class SaleCalculationService {
         for (Sale sale : saleList
         ) {
             printCheckService.printCheck(sale);
-            cost = cost.add(sale.getProduct().getProductPrice().multiply(BigDecimal.valueOf(sale.getProductSalesAmount())));
+            cost = cost.add(sale.getProductSalesTotalPrice());
         }
         BigDecimal percent = BigDecimal.ZERO;
         if (cardDiscount.compareTo(BigDecimal.ZERO) > 0) {

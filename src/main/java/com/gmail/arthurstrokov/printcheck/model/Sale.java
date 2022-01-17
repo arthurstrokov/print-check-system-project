@@ -12,14 +12,16 @@ public class Sale {
     @ManyToOne
     private Product product;
     private BigDecimal productSalesPrice;
+    private BigDecimal productSalesTotalPrice;
     private Long productSalesAmount;
 
     public Sale() {
     }
 
-    public Sale(Product product, BigDecimal productSalesPrice, Long productSalesAmount) {
+    public Sale(Product product, BigDecimal productSalesPrice, BigDecimal productSalesTotalPrice, Long productSalesAmount) {
         this.product = product;
         this.productSalesPrice = productSalesPrice;
+        this.productSalesTotalPrice = productSalesTotalPrice;
         this.productSalesAmount = productSalesAmount;
     }
 
@@ -55,17 +57,25 @@ public class Sale {
         this.productSalesAmount = productSalesAmount;
     }
 
+    public BigDecimal getProductSalesTotalPrice() {
+        return productSalesTotalPrice;
+    }
+
+    public void setProductSalesTotalPrice(BigDecimal productSalesTotalPrice) {
+        this.productSalesTotalPrice = productSalesTotalPrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sale sale = (Sale) o;
-        return Objects.equals(id, sale.id) && Objects.equals(product, sale.product) && Objects.equals(productSalesPrice, sale.productSalesPrice) && Objects.equals(productSalesAmount, sale.productSalesAmount);
+        return Objects.equals(id, sale.id) && Objects.equals(product, sale.product) && Objects.equals(productSalesPrice, sale.productSalesPrice) && Objects.equals(productSalesTotalPrice, sale.productSalesTotalPrice) && Objects.equals(productSalesAmount, sale.productSalesAmount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, product, productSalesPrice, productSalesAmount);
+        return Objects.hash(id, product, productSalesPrice, productSalesTotalPrice, productSalesAmount);
     }
 
     @Override
@@ -74,6 +84,7 @@ public class Sale {
                 "id=" + id +
                 ", product=" + product +
                 ", productSalesPrice=" + productSalesPrice +
+                ", productSalesTotalPrice=" + productSalesTotalPrice +
                 ", productSalesAmount=" + productSalesAmount +
                 '}';
     }

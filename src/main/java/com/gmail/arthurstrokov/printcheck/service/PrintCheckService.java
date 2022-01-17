@@ -32,7 +32,7 @@ public class PrintCheckService {
                         sale.getProduct().getProductName() + "      " +
                         sale.getProduct().getProductPrice() + "     " +
                         sale.getProductSalesPrice() + "     " +
-                        sale.getProductSalesPrice().multiply(BigDecimal.valueOf(sale.getProductSalesAmount())));
+                        sale.getProductSalesTotalPrice());
         System.out.println(string);
         print(string);
     }
