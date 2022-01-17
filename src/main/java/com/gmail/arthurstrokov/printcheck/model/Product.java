@@ -10,19 +10,19 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private Integer discount;
-    private BigDecimal price;
+    private String productName;
+    private BigDecimal productDiscountPercentage;
+    private BigDecimal productPrice;
     @OneToMany
-    private Set<Sell> sells;
+    private Set<Sale> setSale;
 
     public Product() {
     }
 
-    public Product(String name, Integer discount, BigDecimal price) {
-        this.name = name;
-        this.discount = discount;
-        this.price = price;
+    public Product(String productName, BigDecimal productDiscountPercentage, BigDecimal productPrice) {
+        this.productName = productName;
+        this.productDiscountPercentage = productDiscountPercentage;
+        this.productPrice = productPrice;
     }
 
     public Long getId() {
@@ -33,36 +33,28 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public Integer getDiscount() {
-        return discount;
+    public BigDecimal getProductPrice() {
+        return productPrice;
     }
 
-    public void setDiscount(Integer discount) {
-        this.discount = discount;
+    public void setProductPrice(BigDecimal productPrice) {
+        this.productPrice = productPrice;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getProductDiscountPercentage() {
+        return productDiscountPercentage;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Set<Sell> getSells() {
-        return sells;
-    }
-
-    public void setSells(Set<Sell> sells) {
-        this.sells = sells;
+    public void setProductDiscountPercentage(BigDecimal productDiscountPercentage) {
+        this.productDiscountPercentage = productDiscountPercentage;
     }
 
     @Override
@@ -70,21 +62,21 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(discount, product.discount) && Objects.equals(price, product.price);
+        return Objects.equals(id, product.id) && Objects.equals(productName, product.productName) && Objects.equals(productDiscountPercentage, product.productDiscountPercentage) && Objects.equals(productPrice, product.productPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, discount, price);
+        return Objects.hash(id, productName, productDiscountPercentage, productPrice);
     }
 
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", discount=" + discount +
-                ", price=" + price +
+                ", productName='" + productName + '\'' +
+                ", productDiscountPercentage=" + productDiscountPercentage +
+                ", productPrice=" + productPrice +
                 '}';
     }
 }
