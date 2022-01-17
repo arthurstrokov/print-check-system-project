@@ -1,9 +1,11 @@
 package com.gmail.arthurstrokov.printcheck.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 public class Product {
@@ -13,8 +15,6 @@ public class Product {
     private String productName;
     private BigDecimal productDiscountPercentage;
     private BigDecimal productPrice;
-    @OneToMany
-    private Set<Sale> setSale;
 
     public Product() {
     }
@@ -41,20 +41,20 @@ public class Product {
         this.productName = productName;
     }
 
-    public BigDecimal getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(BigDecimal productPrice) {
-        this.productPrice = productPrice;
-    }
-
     public BigDecimal getProductDiscountPercentage() {
         return productDiscountPercentage;
     }
 
     public void setProductDiscountPercentage(BigDecimal productDiscountPercentage) {
         this.productDiscountPercentage = productDiscountPercentage;
+    }
+
+    public BigDecimal getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(BigDecimal productPrice) {
+        this.productPrice = productPrice;
     }
 
     @Override

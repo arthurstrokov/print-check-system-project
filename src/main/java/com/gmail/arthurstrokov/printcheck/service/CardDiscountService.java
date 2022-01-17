@@ -1,16 +1,26 @@
-package com.gmail.arthurstrokov.printcheck.util;
+package com.gmail.arthurstrokov.printcheck.service;
 
 import com.gmail.arthurstrokov.printcheck.model.Card;
 import com.gmail.arthurstrokov.printcheck.repository.CardRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class GetCardDiscount {
+@Service
+public class CardDiscountService {
+    @Autowired
+    private final CardRepository cardRepository;
 
-    public static Integer getCardDiscount(List<String> checkInValues, CardRepository cardRepository) {
-        int cardDiscount = 0;
+    public CardDiscountService(CardRepository cardRepository) {
+        this.cardRepository = cardRepository;
+    }
+
+    public BigDecimal getCardDiscount(List<String> checkInValues) {
+        BigDecimal cardDiscount = BigDecimal.ZERO;
         Pattern pattern = Pattern.compile("card*");
         for (String card : checkInValues
         ) {

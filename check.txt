@@ -1,1 +1,14 @@
-cty: name:    price: finalPrice: total: 
+quantity:   name:   price:  finalPrice: total: 
+3        Product3      0.22     0.22     0.66
+6        Product3      0.22     0.21     1.26
+1        Product1      0.98     0.98     0.98
+2        Product8      0.89     0.89     1.78
+4        Product7      0.66     0.66     2.64
+5        Product7      0.66     0.63     3.15
+4        Product0      0.18     0.18     0.72
+6        Product1      0.98     0.96     5.76
+-------------------------------------
+Card discount:                   5.00
+        Cost                     17.28
+        %                        0.86
+        Total:                   16.42

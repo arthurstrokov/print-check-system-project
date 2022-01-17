@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -11,12 +12,12 @@ public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer discount;
+    private BigDecimal discount;
 
     public Card() {
     }
 
-    public Card(Integer discount) {
+    public Card(BigDecimal discount) {
         this.discount = discount;
     }
 
@@ -28,11 +29,11 @@ public class Card {
         this.id = id;
     }
 
-    public Integer getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Integer discount) {
+    public void setDiscount(BigDecimal discount) {
         this.discount = discount;
     }
 
