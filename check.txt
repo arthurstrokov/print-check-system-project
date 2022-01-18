@@ -1,14 +1,6 @@
 quantity:   name:   price:  finalPrice: total: 
-3        Product3      0.63     0.63     1.89
-6        Product3      0.63     0.57     3.78
-1        Product1      0.10     0.10     0.10
-2        Product8      0.60     0.60     1.20
-4        Product7      0.98     0.98     3.92
-5        Product7      0.98     0.90     4.90
-4        Product0      0.94     0.94     3.76
-6        Product1      0.10     0.10     0.60
 -------------------------------------
-Card discount:                   2.00
-        Cost                     20.15
-        %                        0.40
-        Total:                   19.75
+Card discount:                   0
+        Cost                     0
+        %                        0
+        Total:                   0

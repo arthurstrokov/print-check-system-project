@@ -4,6 +4,8 @@ import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.model.Sale;
 import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
 import com.gmail.arthurstrokov.printcheck.repository.SaleRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.util.List;
 
 @Service
 public class SaleCalculationService {
+    private static final Logger log = LoggerFactory.getLogger(SaleCalculationService.class);
+
     @Autowired
     private final ProductRepository productRepository;
     @Autowired
@@ -29,17 +33,20 @@ public class SaleCalculationService {
 
     public List<Sale> saleOperation(List<String> inputValuesList, Integer sizeValuesList) {
         List<Sale> saleList = new ArrayList<>();
+        try {
+            for (int i = 0; i < sizeValuesList; i++) {
+                String productInCheck = inputValuesList.get(i);
+                String[] parts = productInCheck.split("-");
+                String productId = parts[0];
+                long productSalesAmount = Integer.parseInt((parts[1]));
 
-        for (int i = 0; i < sizeValuesList; i++) {
-            String productInCheck = inputValuesList.get(i);
-            String[] parts = productInCheck.split("-");
-            String productId = parts[0];
-            long productSalesAmount = Integer.parseInt((parts[1]));
+                Product product = productRepository.findById(Integer.parseInt(productId));
 
-            Product product = productRepository.findById(Integer.parseInt(productId));
-
-            Sale sale = saleProduct(product, productSalesAmount);
-            saleList.add(sale);
+                Sale sale = saleProduct(product, productSalesAmount);
+                saleList.add(sale);
+            }
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            log.info(e.getMessage());
         }
         return saleList;
     }
