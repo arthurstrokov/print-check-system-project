@@ -54,7 +54,7 @@ public class PrintCheckApplication {
             // Create some Card/Product objects, add them in DB
             util.util();
             // Take values from somewhere
-            String input = inputService.readFromFile(Path.of("demoxxx.txt"));
+            String input = inputService.readFromFile(Path.of("demowrong.txt"));
             // Add values to list
             List<String> inputValuesList = new ArrayList<>(Arrays.asList(input.split(" ")));
             int sizeValuesList = inputValuesList.size();

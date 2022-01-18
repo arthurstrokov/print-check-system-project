@@ -2,6 +2,8 @@ package com.gmail.arthurstrokov.printcheck.service;
 
 import com.gmail.arthurstrokov.printcheck.model.Card;
 import com.gmail.arthurstrokov.printcheck.repository.CardRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ import java.util.regex.Pattern;
 
 @Service
 public class CardDiscountService {
+    private static final Logger log = LoggerFactory.getLogger(CardDiscountService.class);
     @Autowired
     private final CardRepository cardRepository;
 
@@ -31,7 +34,12 @@ public class CardDiscountService {
                 String[] part = presentedCard.split("-");
                 String cardId = part[1];
                 Card availableCard = cardRepository.findById(Long.parseLong(cardId));
-                cardDiscount = availableCard.getDiscount();
+                try {
+                    cardDiscount = availableCard.getDiscount();
+                } catch (NullPointerException e) {
+                    log.info(e.getMessage());
+                    log.info(String.format("There is no card with its id: %s", cardId));
+                }
             }
         }
         return cardDiscount;

@@ -42,11 +42,19 @@ public class SaleCalculationService {
 
                 Product product = productRepository.findById(Integer.parseInt(productId));
 
-                Sale sale = saleProduct(product, productSalesAmount);
-                saleList.add(sale);
+                try {
+                    Sale sale = saleProduct(product, productSalesAmount);
+                    saleList.add(sale);
+                } catch (NullPointerException e) {
+                    log.info(e.getMessage());
+                    log.info("There is no product to save");
+                }
             }
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             log.info(e.getMessage());
+            log.info("Wrong input values");
+            log.info("You should understand what is going wrong with upcoming values before continue");
+            System.exit(0);
         }
         return saleList;
     }

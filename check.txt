@@ -1,6 +1,0 @@
-quantity:   name:   price:  finalPrice: total: 
--------------------------------------
-Card discount:                   0
-        Cost                     0
-        %                        0
-        Total:                   0
