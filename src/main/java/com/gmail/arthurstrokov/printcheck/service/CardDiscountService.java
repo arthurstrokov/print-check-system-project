@@ -32,13 +32,15 @@ public class CardDiscountService {
             if (matchFound) {
                 String presentedCard = checkInValues.get(checkInValues.size() - 1);
                 String[] part = presentedCard.split("-");
-                String cardId = part[1];
-                Card availableCard = cardRepository.findById(Long.parseLong(cardId));
+                Card availableCard;
+                String cardId = "";
                 try {
+                    cardId = part[1];
+                    availableCard = cardRepository.findById(Long.parseLong(cardId));
                     cardDiscount = availableCard.getDiscount();
-                } catch (NullPointerException e) {
-                    log.info(e.getMessage());
-                    log.info(String.format("There is no card with its id: %s", cardId));
+                } catch (Exception e) {
+                    log.info(String.format("There is no card id: %s", cardId));
+                    log.info(e.getMessage() + "...Check input values");
                 }
             }
         }

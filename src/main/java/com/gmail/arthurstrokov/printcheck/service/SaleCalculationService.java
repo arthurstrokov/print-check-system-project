@@ -33,28 +33,25 @@ public class SaleCalculationService {
 
     public List<Sale> saleOperation(List<String> inputValuesList, Integer sizeValuesList) {
         List<Sale> saleList = new ArrayList<>();
-        try {
-            for (int i = 0; i < sizeValuesList; i++) {
-                String productInCheck = inputValuesList.get(i);
-                String[] parts = productInCheck.split("-");
+        for (int i = 0; i < sizeValuesList; i++) {
+            String productInCheck = inputValuesList.get(i);
+            String[] parts = productInCheck.split("-");
+
+            Product product = new Product();
+            long productSalesAmount = 0;
+            try {
                 String productId = parts[0];
-                long productSalesAmount = Integer.parseInt((parts[1]));
-
-                Product product = productRepository.findById(Integer.parseInt(productId));
-
-                try {
-                    Sale sale = saleProduct(product, productSalesAmount);
-                    saleList.add(sale);
-                } catch (NullPointerException e) {
-                    log.info(e.getMessage());
-                    log.info("There is no product to save");
-                }
+                productSalesAmount = Integer.parseInt((parts[1]));
+                product = productRepository.findById(Integer.parseInt(productId));
+            } catch (Exception e) {
+                log.info(e.getMessage() + "...Check input values");
             }
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            log.info(e.getMessage());
-            log.info("Wrong input values");
-            log.info("You should understand what is going wrong with upcoming values before continue");
-            System.exit(0);
+            try {
+                Sale sale = saleProduct(product, productSalesAmount);
+                saleList.add(sale);
+            } catch (NullPointerException e) {
+                log.info(e.getMessage() + "...Check input values");
+            }
         }
         return saleList;
     }

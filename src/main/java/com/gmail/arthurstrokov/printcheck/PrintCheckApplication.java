@@ -49,12 +49,13 @@ public class PrintCheckApplication {
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
-            boolean success = (new File("check.txt")).delete();
-            log.info(String.valueOf(success));
+            String fileName = "check.txt";
+            boolean success = (new File(fileName)).delete();
+            log.info("File deleted: " + success);
             // Create some Card/Product objects, add them in DB
             util.util();
             // Take values from somewhere
-            String input = inputService.readFromFile(Path.of("demowrong.txt"));
+            String input = inputService.readFromFile(Path.of("demo.txt"));
             // Add values to list
             List<String> inputValuesList = new ArrayList<>(Arrays.asList(input.split(" ")));
             int sizeValuesList = inputValuesList.size();
