@@ -33,7 +33,7 @@ public class Util {
             productRepository.save(new Product(
                     "Product " + i,
                     BigDecimal.valueOf(rn.nextInt(9) + 2),
-                    BigDecimal.valueOf(Math.random()).setScale(2, RoundingMode.DOWN),
+                    BigDecimal.valueOf(Math.random()).setScale(2, RoundingMode.HALF_DOWN),
                     rn.nextInt(10) + 1));
         }
     }

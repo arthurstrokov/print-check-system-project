@@ -13,12 +13,12 @@ public class Sale {
     private Product product;
     private BigDecimal productSalesPrice;
     private BigDecimal productSalesTotalPrice;
-    private Long productSalesAmount;
+    private Integer productSalesAmount;
 
     public Sale() {
     }
 
-    public Sale(Product product, BigDecimal productSalesPrice, BigDecimal productSalesTotalPrice, Long productSalesAmount) {
+    public Sale(Product product, BigDecimal productSalesPrice, BigDecimal productSalesTotalPrice, Integer productSalesAmount) {
         this.product = product;
         this.productSalesPrice = productSalesPrice;
         this.productSalesTotalPrice = productSalesTotalPrice;
@@ -49,11 +49,11 @@ public class Sale {
         this.productSalesPrice = productSalesPrice;
     }
 
-    public Long getProductSalesAmount() {
+    public Integer getProductSalesAmount() {
         return productSalesAmount;
     }
 
-    public void setProductSalesAmount(Long productSalesAmount) {
+    public void setProductSalesAmount(Integer productSalesAmount) {
         this.productSalesAmount = productSalesAmount;
     }
 

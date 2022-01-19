@@ -13,12 +13,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class CardDiscountService {
-    private static final Logger log = LoggerFactory.getLogger(CardDiscountService.class);
+public class CardService {
+    private static final Logger log = LoggerFactory.getLogger(CardService.class);
     @Autowired
     private final CardRepository cardRepository;
 
-    public CardDiscountService(CardRepository cardRepository) {
+    public CardService(CardRepository cardRepository) {
         this.cardRepository = cardRepository;
     }
 
@@ -40,7 +40,7 @@ public class CardDiscountService {
                     cardDiscount = availableCard.getDiscount();
                 } catch (Exception e) {
                     log.info(String.format("There is no card id: %s", cardId));
-                    log.info(e.getMessage() + "...Check input values");
+                    log.info(e.getMessage() + "...Check input card value");
                 }
             }
         }
