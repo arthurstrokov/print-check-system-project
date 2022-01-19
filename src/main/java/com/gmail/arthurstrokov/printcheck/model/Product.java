@@ -18,14 +18,17 @@ public class Product {
     private BigDecimal productDiscountPercentage;
     @NotNull
     private BigDecimal productPrice;
+    @NotNull
+    private Integer priceReduction; // Quantity at which a price reduction is possible
 
     public Product() {
     }
 
-    public Product(String productName, BigDecimal productDiscountPercentage, BigDecimal productPrice) {
+    public Product(String productName, BigDecimal productDiscountPercentage, BigDecimal productPrice, Integer priceReduction) {
         this.productName = productName;
         this.productDiscountPercentage = productDiscountPercentage;
         this.productPrice = productPrice;
+        this.priceReduction = priceReduction;
     }
 
     public Long getId() {
@@ -60,17 +63,25 @@ public class Product {
         this.productPrice = productPrice;
     }
 
+    public Integer getPriceReduction() {
+        return priceReduction;
+    }
+
+    public void setPriceReduction(Integer priceReduction) {
+        this.priceReduction = priceReduction;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(productName, product.productName) && Objects.equals(productDiscountPercentage, product.productDiscountPercentage) && Objects.equals(productPrice, product.productPrice);
+        return Objects.equals(id, product.id) && Objects.equals(productName, product.productName) && Objects.equals(productDiscountPercentage, product.productDiscountPercentage) && Objects.equals(productPrice, product.productPrice) && Objects.equals(priceReduction, product.priceReduction);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, productName, productDiscountPercentage, productPrice);
+        return Objects.hash(id, productName, productDiscountPercentage, productPrice, priceReduction);
     }
 
     @Override
@@ -80,6 +91,7 @@ public class Product {
                 ", productName='" + productName + '\'' +
                 ", productDiscountPercentage=" + productDiscountPercentage +
                 ", productPrice=" + productPrice +
+                ", priceReduction=" + priceReduction +
                 '}';
     }
 }

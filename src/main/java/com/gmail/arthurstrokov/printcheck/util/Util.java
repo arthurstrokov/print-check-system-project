@@ -31,9 +31,10 @@ public class Util {
         }
         for (long i = 0; i < 10; i++) {
             productRepository.save(new Product(
-                    "Product" + i,
+                    "Product " + i,
                     BigDecimal.valueOf(rn.nextInt(9) + 2),
-                    BigDecimal.valueOf(Math.random()).setScale(2, RoundingMode.DOWN)));
+                    BigDecimal.valueOf(Math.random()).setScale(2, RoundingMode.DOWN),
+                    rn.nextInt(10) + 1));
         }
     }
 }

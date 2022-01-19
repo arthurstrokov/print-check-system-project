@@ -64,12 +64,7 @@ public class SaleCalculationService {
         BigDecimal productPrice = product.getProductPrice();
         BigDecimal productPriceDiscount = productPrice.multiply(productDiscountPercentage).divide(BigDecimal.valueOf(100), 2, RoundingMode.DOWN);
 
-        BigDecimal productSalesPrice;
-        if (productSalesAmount > 4) {
-            productSalesPrice = productPrice.subtract(productPriceDiscount);
-        } else {
-            productSalesPrice = productPrice;
-        }
+        BigDecimal productSalesPrice = product.getPriceReduction() == 0 ? productPrice : productPrice.subtract(productPriceDiscount);
 
         productSalesTotalPrice = productSalesTotalPrice.add(product.getProductPrice()).multiply(BigDecimal.valueOf(productSalesAmount));
 
