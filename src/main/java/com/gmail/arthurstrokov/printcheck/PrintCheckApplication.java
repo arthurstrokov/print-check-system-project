@@ -29,7 +29,7 @@ public class PrintCheckApplication {
     @Autowired
     private final InputService inputService;
     @Autowired
-    private final CardService cardDiscountService;
+    private final CardService cardService;
     @Autowired
     private final SaleService saleCalculationService;
     @Autowired
@@ -39,13 +39,13 @@ public class PrintCheckApplication {
 
     public PrintCheckApplication(Util util,
                                  InputService inputService,
-                                 CardService cardDiscountService,
+                                 CardService cardService,
                                  SaleService saleCalculationService,
                                  ProductService productService,
                                  PrintService printService) {
         this.util = util;
         this.inputService = inputService;
-        this.cardDiscountService = cardDiscountService;
+        this.cardService = cardService;
         this.saleCalculationService = saleCalculationService;
         this.productService = productService;
         this.printService = printService;
@@ -68,7 +68,7 @@ public class PrintCheckApplication {
             // Add values to list
             List<String> inputValuesList = new ArrayList<>(Arrays.asList(input.split(" ")));
             // If card exists, get discount
-            BigDecimal cardDiscount = cardDiscountService.getCardDiscount(inputValuesList);
+            BigDecimal cardDiscount = cardService.getCardDiscount(inputValuesList);
             int sizeValuesList = cardDiscount.compareTo(BigDecimal.ZERO) > 0 ? inputValuesList.size() - 1 : inputValuesList.size();
             // Get products from order
             Map<Product, Integer> products = productService.getProducts(inputValuesList, sizeValuesList);
