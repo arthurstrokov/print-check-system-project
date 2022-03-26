@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class Utils {
+public class HelpfulUtils {
 
     private static Random random;
 
-    private Utils() {
+    private HelpfulUtils() {
     }
 
     public static List<Card> randomCards() {

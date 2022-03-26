@@ -1,7 +1,7 @@
 package com.gmail.arthurstrokov.printcheck.repository;
 
 import com.gmail.arthurstrokov.printcheck.model.Card;
-import com.gmail.arthurstrokov.printcheck.util.Utils;
+import com.gmail.arthurstrokov.printcheck.util.HelpfulUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ class CardRepositoryTest {
 
     CardRepository cardRepository = mock(CardRepository.class);
 
-    List<Card> cards = Utils.randomCards();
+    List<Card> cards = HelpfulUtils.randomCards();
 
     Card card = new Card();
 

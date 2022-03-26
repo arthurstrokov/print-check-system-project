@@ -6,7 +6,7 @@ import com.gmail.arthurstrokov.printcheck.model.Sale;
 import com.gmail.arthurstrokov.printcheck.repository.CardRepository;
 import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
 import com.gmail.arthurstrokov.printcheck.service.*;
-import com.gmail.arthurstrokov.printcheck.util.Utils;
+import com.gmail.arthurstrokov.printcheck.util.HelpfulUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,8 +71,8 @@ public class PrintCheckApplication {
             log.info("File deleted: {}", success);
 
             // Create some Card/Product objects, add them in H2 DB
-            List<Card> cardList = Utils.randomCards();
-            List<Product> productList = Utils.randomProducts();
+            List<Card> cardList = HelpfulUtils.randomCards();
+            List<Product> productList = HelpfulUtils.randomProducts();
             cardRepository.saveAll(cardList);
             productRepository.saveAll(productList);
 
