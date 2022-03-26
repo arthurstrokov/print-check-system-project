@@ -44,5 +44,7 @@ class CardServiceTest {
         assertEquals(BigDecimal.valueOf(10), cardDiscount);
         assertNotEquals(BigDecimal.valueOf(0), cardDiscount);
         assertEquals(cardDiscount, cardRepository.findById(4).getDiscount());
+
+//        assertThrows(Exception.class, () -> cardRepository.findById(4)); //TODO
     }
 }
