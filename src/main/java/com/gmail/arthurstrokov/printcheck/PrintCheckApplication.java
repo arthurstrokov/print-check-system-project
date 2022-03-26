@@ -27,8 +27,7 @@ import java.util.Map;
 @SpringBootApplication
 public class PrintCheckApplication {
     private static final Logger log = LoggerFactory.getLogger(PrintCheckApplication.class);
-    @Autowired
-    private final Util util;
+
     @Autowired
     private final InputService inputService;
     @Autowired
@@ -44,15 +43,13 @@ public class PrintCheckApplication {
     @Autowired
     private final ProductRepository productRepository;
 
-    public PrintCheckApplication(Util util,
-                                 InputService inputService,
+    public PrintCheckApplication(InputService inputService,
                                  CardService cardService,
                                  SaleService saleCalculationService,
                                  ProductService productService,
                                  PrintService printService,
                                  CardRepository cardRepository,
                                  ProductRepository productRepository) {
-        this.util = util;
         this.inputService = inputService;
         this.cardService = cardService;
         this.saleCalculationService = saleCalculationService;
