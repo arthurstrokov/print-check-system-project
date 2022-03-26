@@ -10,6 +10,6 @@ class PrintCheckApplicationTests {
 
     @Test
     void contextLoads() {
-        assertTrue(true);
+        assertTrue(true); // serves no real purpose
     }
 }
