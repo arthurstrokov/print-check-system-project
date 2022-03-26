@@ -87,7 +87,7 @@ public class PrintCheckApplication {
             Map<Product, Integer> products = productService.getProducts(inputValuesList, sizeValuesList);
             // Count products price sum
             List<Sale> saleList = saleCalculationService.sale(products);
-            // Print result
+            // Print result both in console and file
             printService.totalCalculation(saleList, cardDiscount);
         };
     }

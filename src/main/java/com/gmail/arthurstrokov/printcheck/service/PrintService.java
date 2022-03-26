@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 public class PrintService {
-    private void print(String string) {
+    private void printToFile(String string) {
         try (BufferedWriter out = new BufferedWriter(new FileWriter("check.txt", true))) {
             out.write(string);
             out.append('\n');
@@ -24,7 +24,7 @@ public class PrintService {
     private void printHeader() {
         String string = "qty:\tname:\t\tprice:\tfPrice:\ttotal: ";
         System.out.println(string);
-        print(string);
+        printToFile(string);
     }
 
     private void printCheck(Sale sale) {
@@ -35,7 +35,7 @@ public class PrintService {
                         sale.getProductSalesPrice() + "     " +
                         sale.getProductSalesTotalPrice());
         System.out.println(string);
-        print(string);
+        printToFile(string);
     }
 
     private void printTotal(BigDecimal cardDiscount, BigDecimal cost, BigDecimal percent, BigDecimal total) {
@@ -46,7 +46,7 @@ public class PrintService {
                 "        %                        " + percent,
                 "        Total:                   " + total);
         System.out.println(string);
-        print(string);
+        printToFile(string);
     }
 
     public void totalCalculation(List<Sale> saleList, BigDecimal cardDiscount) {
