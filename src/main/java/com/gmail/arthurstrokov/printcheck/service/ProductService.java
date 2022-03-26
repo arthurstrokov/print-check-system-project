@@ -13,7 +13,9 @@ import java.util.Map;
 
 @Service
 public class ProductService {
+
     private static final Logger log = LoggerFactory.getLogger(ProductService.class);
+
     @Autowired
     private final ProductRepository productRepository;
 
@@ -30,16 +32,14 @@ public class ProductService {
                 String productId = parts[0];
                 Product product = productRepository.findById(Integer.parseInt(productId));
                 int productSalesAmount = Integer.parseInt((parts[1]));
-
                 if (products.containsKey(product)) {
                     int oldValueProductSalesAmount = products.get(product);
                     products.put(product, oldValueProductSalesAmount + productSalesAmount);
                 } else {
                     products.put(product, productSalesAmount);
                 }
-
             } catch (Exception e) {
-                log.info(e.getMessage() + "...Check input values; in 'getProducts' method");
+                log.info("{} {}", e.getMessage(), "...Check input values; in 'getProducts' method");
             }
         }
         return products;
