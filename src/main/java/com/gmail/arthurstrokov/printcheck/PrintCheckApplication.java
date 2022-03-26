@@ -49,7 +49,9 @@ public class PrintCheckApplication {
                                  CardService cardService,
                                  SaleService saleCalculationService,
                                  ProductService productService,
-                                 PrintService printService, CardRepository cardRepository, ProductRepository productRepository) {
+                                 PrintService printService,
+                                 CardRepository cardRepository,
+                                 ProductRepository productRepository) {
         this.util = util;
         this.inputService = inputService;
         this.cardService = cardService;
@@ -69,11 +71,11 @@ public class PrintCheckApplication {
         return args -> {
             String fileName = "check.txt";
             boolean success = Files.deleteIfExists(Path.of(fileName));
-            log.info("File deleted: " + success);
+            log.info("File deleted: {}", success);
 
             // Create some Card/Product objects, add them in H2 DB
-            List<Card> cardList = util.randomCards();
-            List<Product> productList = util.randomProducts();
+            List<Card> cardList = Util.randomCards();
+            List<Product> productList = Util.randomProducts();
             cardRepository.saveAll(cardList);
             productRepository.saveAll(productList);
 

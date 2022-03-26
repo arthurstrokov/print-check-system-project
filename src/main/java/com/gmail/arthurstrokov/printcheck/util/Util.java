@@ -13,9 +13,12 @@ import java.util.Random;
 @Service
 public class Util {
 
-    private Random random;
+    private Util() {
+    }
 
-    public List<Card> randomCards() {
+    private static Random random;
+
+    public static List<Card> randomCards() {
         List<Card> cards = new ArrayList<>();
         Card card;
         random = new Random();
@@ -26,7 +29,7 @@ public class Util {
         return cards;
     }
 
-    public List<Product> randomProducts() {
+    public static List<Product> randomProducts() {
         List<Product> products = new ArrayList<>();
         Product product;
         random = new Random();
