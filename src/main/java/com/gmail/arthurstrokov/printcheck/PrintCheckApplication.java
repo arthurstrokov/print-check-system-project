@@ -1,7 +1,10 @@
 package com.gmail.arthurstrokov.printcheck;
 
+import com.gmail.arthurstrokov.printcheck.model.Card;
 import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.model.Sale;
+import com.gmail.arthurstrokov.printcheck.repository.CardRepository;
+import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
 import com.gmail.arthurstrokov.printcheck.service.*;
 import com.gmail.arthurstrokov.printcheck.util.Util;
 import org.slf4j.Logger;
@@ -36,19 +39,25 @@ public class PrintCheckApplication {
     private final ProductService productService;
     @Autowired
     private final PrintService printService;
+    @Autowired
+    private final CardRepository cardRepository;
+    @Autowired
+    private final ProductRepository productRepository;
 
     public PrintCheckApplication(Util util,
                                  InputService inputService,
                                  CardService cardService,
                                  SaleService saleCalculationService,
                                  ProductService productService,
-                                 PrintService printService) {
+                                 PrintService printService, CardRepository cardRepository, ProductRepository productRepository) {
         this.util = util;
         this.inputService = inputService;
         this.cardService = cardService;
         this.saleCalculationService = saleCalculationService;
         this.productService = productService;
         this.printService = printService;
+        this.cardRepository = cardRepository;
+        this.productRepository = productRepository;
     }
 
     public static void main(String[] args) {
@@ -61,8 +70,13 @@ public class PrintCheckApplication {
             String fileName = "check.txt";
             boolean success = Files.deleteIfExists(Path.of(fileName));
             log.info("File deleted: " + success);
+
             // Create some Card/Product objects, add them in H2 DB
-            util.util();
+            List<Card> cardList = util.randomCards();
+            List<Product> productList = util.randomProducts();
+            cardRepository.saveAll(cardList);
+            productRepository.saveAll(productList);
+
             // Take values from somewhere
             String input = inputService.readFromSomewhere(Path.of("demo.txt"));
             // Add values to list
