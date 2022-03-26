@@ -9,7 +9,6 @@ import com.gmail.arthurstrokov.printcheck.service.*;
 import com.gmail.arthurstrokov.printcheck.util.HelpfulUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,19 +27,12 @@ import java.util.Map;
 public class PrintCheckApplication {
     private static final Logger log = LoggerFactory.getLogger(PrintCheckApplication.class);
 
-    @Autowired
     private final InputService inputService;
-    @Autowired
     private final CardService cardService;
-    @Autowired
     private final SaleService saleCalculationService;
-    @Autowired
     private final ProductService productService;
-    @Autowired
     private final PrintService printService;
-    @Autowired
     private final CardRepository cardRepository;
-    @Autowired
     private final ProductRepository productRepository;
 
     public PrintCheckApplication(InputService inputService,
