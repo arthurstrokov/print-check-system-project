@@ -31,7 +31,7 @@ public class SaleService {
                 Sale sale = saleProduct(product.getKey(), product.getValue());
                 saleList.add(sale);
             } catch (NullPointerException e) {
-                log.info(e.getMessage() + "...Check input values; in 'sale' method; seems like you don't have product with it's id");
+                log.info("{} {}", e.getMessage(), "...Check input values; in 'sale' method; seems like you don't have product with it's id");
             }
         }
         return saleList;
