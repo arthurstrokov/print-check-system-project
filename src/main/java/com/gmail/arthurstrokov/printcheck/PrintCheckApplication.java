@@ -1,7 +1,10 @@
 package com.gmail.arthurstrokov.printcheck;
 
+import com.gmail.arthurstrokov.printcheck.model.Card;
 import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.model.Sale;
+import com.gmail.arthurstrokov.printcheck.repository.CardRepository;
+import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
 import com.gmail.arthurstrokov.printcheck.service.*;
 import com.gmail.arthurstrokov.printcheck.util.Util;
 import org.slf4j.Logger;
@@ -24,8 +27,7 @@ import java.util.Map;
 @SpringBootApplication
 public class PrintCheckApplication {
     private static final Logger log = LoggerFactory.getLogger(PrintCheckApplication.class);
-    @Autowired
-    private final Util util;
+
     @Autowired
     private final InputService inputService;
     @Autowired
@@ -36,19 +38,25 @@ public class PrintCheckApplication {
     private final ProductService productService;
     @Autowired
     private final PrintService printService;
+    @Autowired
+    private final CardRepository cardRepository;
+    @Autowired
+    private final ProductRepository productRepository;
 
-    public PrintCheckApplication(Util util,
-                                 InputService inputService,
+    public PrintCheckApplication(InputService inputService,
                                  CardService cardService,
                                  SaleService saleCalculationService,
                                  ProductService productService,
-                                 PrintService printService) {
-        this.util = util;
+                                 PrintService printService,
+                                 CardRepository cardRepository,
+                                 ProductRepository productRepository) {
         this.inputService = inputService;
         this.cardService = cardService;
         this.saleCalculationService = saleCalculationService;
         this.productService = productService;
         this.printService = printService;
+        this.cardRepository = cardRepository;
+        this.productRepository = productRepository;
     }
 
     public static void main(String[] args) {
@@ -60,9 +68,14 @@ public class PrintCheckApplication {
         return args -> {
             String fileName = "check.txt";
             boolean success = Files.deleteIfExists(Path.of(fileName));
-            log.info("File deleted: " + success);
+            log.info("File deleted: {}", success);
+
             // Create some Card/Product objects, add them in H2 DB
-            util.util();
+            List<Card> cardList = Util.randomCards();
+            List<Product> productList = Util.randomProducts();
+            cardRepository.saveAll(cardList);
+            productRepository.saveAll(productList);
+
             // Take values from somewhere
             String input = inputService.readFromSomewhere(Path.of("demo.txt"));
             // Add values to list
@@ -74,7 +87,7 @@ public class PrintCheckApplication {
             Map<Product, Integer> products = productService.getProducts(inputValuesList, sizeValuesList);
             // Count products price sum
             List<Sale> saleList = saleCalculationService.sale(products);
-            // Print result
+            // Print result both in console and file
             printService.totalCalculation(saleList, cardDiscount);
         };
     }
