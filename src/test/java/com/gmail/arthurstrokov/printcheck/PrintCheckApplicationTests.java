@@ -1,18 +1,20 @@
 package com.gmail.arthurstrokov.printcheck;
 
+import com.gmail.arthurstrokov.printcheck.service.PrintService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Fail.fail;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class PrintCheckApplicationTests {
 
+    @Autowired
+    PrintService printService;
+
     @Test
     void contextLoads() {
-        Stream<Object> should_not_be_called = Stream.of().map(entry -> fail("should not be called"));
-//        fail("Not yet implemented");
+        assertNotNull(printService);
     }
 }
