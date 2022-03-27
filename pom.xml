@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.gmail.arthurstrokov</groupId>
-    <artifactId>printcheck</artifactId>
+    <artifactId>print-check-system-project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Print Check</name>
     <description>Print Check project for Spring Boot</description>
