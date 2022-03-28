@@ -36,5 +36,6 @@ class InputServiceTest {
         assertEquals("4-3 4-6 2-1 9-2 8-4 8-5 1-4 2-6 3-12 card-4", inputService.readFromSomewhere());
         assertNotEquals("4-3 4-6 2-1 9-2 8-", inputService.readFromSomewhere());
         assertNotNull(inputService.readFromSomewhere());
+        assertDoesNotThrow(() -> inputService.readFromSomewhere());
     }
 }
