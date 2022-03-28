@@ -41,8 +41,8 @@ public class CardService {
                     availableCard = cardRepository.findById(Long.parseLong(cardId));
                     cardDiscount = availableCard.getDiscount();
                 } catch (Exception e) {
-                    log.info(String.format("There is no card id: %s", cardId));
-                    log.info(String.format(e.getMessage(), "...Check input card value"));
+                    log.error(String.format("There is no card id: %s", cardId));
+                    log.error(String.format(e.getMessage(), "...Check input card value"));
                 }
             }
         }

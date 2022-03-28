@@ -19,7 +19,7 @@ public class InputService {
         try {
             string = Files.readString(fileName);
         } catch (IOException e) {
-            log.info("{} {}", e.getMessage(), "file does not exists");
+            log.error("{} {}", e.getMessage(), "file does not exists");
         }
         return string;
     }
@@ -30,7 +30,7 @@ public class InputService {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             string = reader.readLine();
         } catch (IOException e) {
-            log.info("{} {}", e.getMessage(), "Something wrong here. You have to know input values format");
+            log.error("{} {}", e.getMessage(), "Something wrong here. You have to know input values format");
         }
         return string;
     }

@@ -39,7 +39,7 @@ public class ProductService {
                     products.put(product, productSalesAmount);
                 }
             } catch (Exception e) {
-                log.info("{} {}", e.getMessage(), "...Check input values; in 'getProducts' method");
+                log.error("{} {}", e.getMessage(), "...Check input values; in 'getProducts' method");
             }
         }
         return products;

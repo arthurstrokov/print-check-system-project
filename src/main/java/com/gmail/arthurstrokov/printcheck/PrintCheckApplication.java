@@ -7,8 +7,6 @@ import com.gmail.arthurstrokov.printcheck.repository.CardRepository;
 import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
 import com.gmail.arthurstrokov.printcheck.service.*;
 import com.gmail.arthurstrokov.printcheck.util.HelpfulUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +23,6 @@ import java.util.Map;
 
 @SpringBootApplication
 public class PrintCheckApplication {
-    private static final Logger log = LoggerFactory.getLogger(PrintCheckApplication.class);
 
     private final InputService inputService;
     private final CardService cardService;
@@ -59,8 +56,7 @@ public class PrintCheckApplication {
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
             String fileName = "check.txt";
-            boolean success = Files.deleteIfExists(Path.of(fileName));
-            log.info("File deleted: {}", success);
+            Files.deleteIfExists(Path.of(fileName));
 
             // Create some Card/Product objects, add them in H2 DB
             List<Card> cardList = HelpfulUtils.randomCards();
