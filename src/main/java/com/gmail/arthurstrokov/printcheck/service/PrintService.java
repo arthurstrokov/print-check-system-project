@@ -12,6 +12,7 @@ import java.util.List;
 
 @Service
 public class PrintService {
+
     private void printToFile(String string) {
         try (BufferedWriter out = new BufferedWriter(new FileWriter("check.txt", true))) {
             out.write(string);
@@ -22,29 +23,29 @@ public class PrintService {
     }
 
     private void printHeader() {
-        String string = "qty:\tname:\t\tprice:\tfPrice:\ttotal: ";
+        String string = String.format("%s %8s %15s %10s %10s", "qty", "name", "price", "fPrice", "total");
         System.out.println(string);
         printToFile(string);
     }
 
     private void printCheck(Sale sale) {
-        String string = String.join("\n",
-                sale.getProductSalesAmount() + "        " +
-                        sale.getProduct().getProductName() + "      " +
-                        sale.getProduct().getProductPrice() + "     " +
-                        sale.getProductSalesPrice() + "     " +
-                        sale.getProductSalesTotalPrice());
+        String string = String.format("%s %15s %10s %10s %10s",
+                sale.getProductSalesAmount(),
+                sale.getProduct().getProductName(),
+                sale.getProduct().getProductPrice(),
+                sale.getProductSalesPrice(),
+                sale.getProductSalesTotalPrice());
         System.out.println(string);
         printToFile(string);
     }
 
     private void printTotal(BigDecimal cardDiscount, BigDecimal cost, BigDecimal percent, BigDecimal total) {
         String string = String.join("\n",
-                "-------------------------------------",
-                "Card discount:                   " + cardDiscount,
-                "        Cost                     " + cost,
-                "        %                        " + percent,
-                "        Total:                   " + total);
+                "--------------------------------------------------",
+                "Card discount:                               " + cardDiscount,
+                "         Cost:                               " + cost,
+                "        %                                    " + percent,
+                "        Total:                               " + total);
         System.out.println(string);
         printToFile(string);
     }
