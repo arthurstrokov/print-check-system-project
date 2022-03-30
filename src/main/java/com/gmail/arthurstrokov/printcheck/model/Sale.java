@@ -1,12 +1,15 @@
 package com.gmail.arthurstrokov.printcheck.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @Entity
 public class Sale {
@@ -24,5 +27,18 @@ public class Sale {
         this.productSalesPrice = productSalesPrice;
         this.productSalesTotalPrice = productSalesTotalPrice;
         this.productSalesAmount = productSalesAmount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Sale sale = (Sale) o;
+        return id != null && Objects.equals(id, sale.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
