@@ -21,6 +21,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Arthur Strokov
+ * @version 1.0
+ */
 @SpringBootApplication
 public class PrintCheckApplication {
 
