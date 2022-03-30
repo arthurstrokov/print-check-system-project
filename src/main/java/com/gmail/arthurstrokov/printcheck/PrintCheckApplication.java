@@ -7,6 +7,7 @@ import com.gmail.arthurstrokov.printcheck.repository.CardRepository;
 import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
 import com.gmail.arthurstrokov.printcheck.service.*;
 import com.gmail.arthurstrokov.printcheck.util.HelpfulUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,6 +27,7 @@ import java.util.Map;
  * @version 1.0
  */
 @SpringBootApplication
+@RequiredArgsConstructor
 public class PrintCheckApplication {
 
     private final InputService inputService;
@@ -35,22 +37,6 @@ public class PrintCheckApplication {
     private final PrintService printService;
     private final CardRepository cardRepository;
     private final ProductRepository productRepository;
-
-    public PrintCheckApplication(InputService inputService,
-                                 CardService cardService,
-                                 SaleService saleCalculationService,
-                                 ProductService productService,
-                                 PrintService printService,
-                                 CardRepository cardRepository,
-                                 ProductRepository productRepository) {
-        this.inputService = inputService;
-        this.cardService = cardService;
-        this.saleCalculationService = saleCalculationService;
-        this.productService = productService;
-        this.printService = printService;
-        this.cardRepository = cardRepository;
-        this.productRepository = productRepository;
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(PrintCheckApplication.class, args);
