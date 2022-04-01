@@ -10,10 +10,20 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * Class that present methods witch allowed
+ * get incoming values from file or somewhere else
+ *
+ * @author Arthur Strokov
+ */
 @Service
 public class InputService {
     private static final Logger log = LoggerFactory.getLogger(InputService.class);
 
+    /**
+     * @param fileName name file with store values
+     * @return String with incoming values
+     */
     public String readFromSomewhere(Path fileName) {
         String string = "";
         try {
@@ -24,6 +34,13 @@ public class InputService {
         return string;
     }
 
+    /**
+     * Overloaded method that allowed get incoming values from String
+     * Could be refactored in more useful method
+     *
+     * @return String with incoming values
+     * @deprecated
+     */
     public String readFromSomewhere() {
         String string = "";
         System.out.println("Enter order: ");
