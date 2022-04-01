@@ -33,6 +33,8 @@ public class PrintService {
 
     /**
      * Print check header
+     *
+     * @see #printToFile(String)
      */
     private void printHeader() {
         String string = String.format("%s %8s %15s %10s %10s", "qty", "name", "price", "fPrice", "total");
@@ -44,6 +46,7 @@ public class PrintService {
      * Print each product
      *
      * @param sale sale
+     * @see #printToFile(String)
      */
     private void printCheck(Sale sale) {
         String string = String.format("%s %15s %10s %10s %10s",
@@ -63,6 +66,7 @@ public class PrintService {
      * @param cost         cost
      * @param percent      percent
      * @param total        total
+     * @see #printToFile(String)
      */
     private void printTotal(BigDecimal cardDiscount, BigDecimal cost, BigDecimal percent, BigDecimal total) {
         String string = String.join("\n",
@@ -75,6 +79,14 @@ public class PrintService {
         printToFile(string);
     }
 
+    /**
+     * Calculate and print product in check
+     *
+     * @param saleList     saleList
+     * @param cardDiscount cardDiscount
+     * @see #printHeader()
+     * @see #printCheck(Sale)
+     */
     public void totalCalculation(List<Sale> saleList, BigDecimal cardDiscount) {
         printHeader();
         BigDecimal cost = BigDecimal.ZERO;
