@@ -11,6 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class that allowed get products
+ *
+ * @author Arthur Strokov
+ */
 @Service
 public class ProductService {
 
@@ -23,6 +28,11 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    /**
+     * @param inputValuesList List with products
+     * @param sizeValuesList  List size
+     * @return counted products
+     */
     public Map<Product, Integer> getProducts(List<String> inputValuesList, Integer sizeValuesList) {
         Map<Product, Integer> products = new HashMap<>();
         for (int i = 0; i < sizeValuesList; i++) {
