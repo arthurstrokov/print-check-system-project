@@ -32,6 +32,7 @@ public class SaleService {
     /**
      * @param products counted products
      * @return sale list for next calculation and printing in check
+     * @see #saleProduct(Product, Integer)
      */
     public List<Sale> sale(Map<Product, Integer> products) {
         List<Sale> saleList = new ArrayList<>();
@@ -53,6 +54,7 @@ public class SaleService {
      * @param product            product
      * @param productSalesAmount product count
      * @return sale
+     * @see #sale(Map)
      */
     public Sale saleProduct(Product product, Integer productSalesAmount) {
         Sale sale = new Sale();
