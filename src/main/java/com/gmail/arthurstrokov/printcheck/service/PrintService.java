@@ -10,9 +10,18 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
+/**
+ * Class that present service for printing check in file
+ *
+ * @author Arthur Strokov
+ */
 @Service
 public class PrintService {
-
+    /**
+     * Save data to file
+     *
+     * @param string with data that saves in file
+     */
     private void printToFile(String string) {
         try (BufferedWriter out = new BufferedWriter(new FileWriter("check.txt", true))) {
             out.write(string);
@@ -22,12 +31,20 @@ public class PrintService {
         }
     }
 
+    /**
+     * Print check header
+     */
     private void printHeader() {
         String string = String.format("%s %8s %15s %10s %10s", "qty", "name", "price", "fPrice", "total");
         System.out.println(string);
         printToFile(string);
     }
 
+    /**
+     * Print each product
+     *
+     * @param sale sale
+     */
     private void printCheck(Sale sale) {
         String string = String.format("%s %15s %10s %10s %10s",
                 sale.getProductSalesAmount(),
@@ -39,6 +56,14 @@ public class PrintService {
         printToFile(string);
     }
 
+    /**
+     * Print total
+     *
+     * @param cardDiscount card discount
+     * @param cost         cost
+     * @param percent      percent
+     * @param total        total
+     */
     private void printTotal(BigDecimal cardDiscount, BigDecimal cost, BigDecimal percent, BigDecimal total) {
         String string = String.join("\n",
                 "--------------------------------------------------",
