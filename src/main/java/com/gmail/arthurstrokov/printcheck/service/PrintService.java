@@ -86,6 +86,7 @@ public class PrintService {
      * @param cardDiscount cardDiscount
      * @see #printHeader()
      * @see #printCheck(Sale)
+     * @see #printTotal(BigDecimal, BigDecimal, BigDecimal, BigDecimal)
      */
     public void totalCalculation(List<Sale> saleList, BigDecimal cardDiscount) {
         printHeader();
