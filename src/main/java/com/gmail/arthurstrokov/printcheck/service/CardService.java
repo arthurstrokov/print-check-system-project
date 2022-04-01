@@ -12,6 +12,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Class that allowed get card discount
+ *
+ * @author Arthur Strokov
+ */
 @Service
 public class CardService {
 
@@ -24,6 +29,10 @@ public class CardService {
         this.cardRepository = cardRepository;
     }
 
+    /**
+     * @param checkInValues List where stored card discount id
+     * @return card discount
+     */
     public BigDecimal getCardDiscount(List<String> checkInValues) {
         BigDecimal cardDiscount = BigDecimal.ZERO;
         Pattern pattern = Pattern.compile("card*");
