@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class that present sale calculation
+ *
+ * @author Arthur Strokov
+ */
 @Service
 public class SaleService {
     private static final Logger log = LoggerFactory.getLogger(SaleService.class);
@@ -24,6 +29,10 @@ public class SaleService {
         this.saleRepository = saleRepository;
     }
 
+    /**
+     * @param products counted products
+     * @return sale list for next calculation and printing in check
+     */
     public List<Sale> sale(Map<Product, Integer> products) {
         List<Sale> saleList = new ArrayList<>();
         for (Map.Entry<Product, Integer> product : products.entrySet()) {
@@ -37,6 +46,14 @@ public class SaleService {
         return saleList;
     }
 
+    /**
+     * Save each sale in database
+     * and return for the next calculation
+     *
+     * @param product            product
+     * @param productSalesAmount product count
+     * @return sale
+     */
     public Sale saleProduct(Product product, Integer productSalesAmount) {
         Sale sale = new Sale();
         BigDecimal productSalesTotalPrice = BigDecimal.ZERO;
