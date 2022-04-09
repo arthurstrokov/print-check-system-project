@@ -2,10 +2,11 @@ package com.gmail.arthurstrokov.printcheck.service;
 
 import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.model.Sale;
+import com.gmail.arthurstrokov.printcheck.repository.SaleMDBRepository;
 import com.gmail.arthurstrokov.printcheck.repository.SaleRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -20,14 +21,12 @@ import java.util.Map;
  * @author Arthur Strokov
  */
 @Service
+@RequiredArgsConstructor
 public class SaleService {
     private static final Logger log = LoggerFactory.getLogger(SaleService.class);
-    @Autowired
-    private final SaleRepository saleRepository;
 
-    public SaleService(SaleRepository saleRepository) {
-        this.saleRepository = saleRepository;
-    }
+    private final SaleRepository saleRepository;
+    private final SaleMDBRepository saleMDBRepository;
 
     /**
      * @param products counted products
@@ -73,6 +72,7 @@ public class SaleService {
         sale.setProductSalesAmount(productSalesAmount);
         sale.setProductSalesTotalPrice(productSalesTotalPrice);
         saleRepository.save(sale);
+        saleMDBRepository.save(sale);
         return sale;
     }
 }
