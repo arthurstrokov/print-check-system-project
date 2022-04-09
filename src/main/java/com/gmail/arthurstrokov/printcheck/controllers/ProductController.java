@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * Employee rest controller
+ * Product rest controller
  *
  * @author Arthur Strokov
  */
@@ -22,7 +22,7 @@ public class ProductController {
     private final ProductRepository repository;
 
     /**
-     * @return List of employees
+     * @return List of products
      */
     @Operation(summary = "Get all products", description = "Return list of products")
     @InspectingController
