@@ -67,6 +67,7 @@ public class PrintCheckApplication {
             List<Sale> saleList = saleCalculationService.sale(products);
             // Print result both in console and file
             printService.totalCalculation(saleList, cardDiscount);
+            printService.printLinks();
         };
     }
 }

@@ -100,4 +100,11 @@ public class PrintService {
         BigDecimal total = cost.subtract(percent);
         printTotal(cardDiscount, cost, percent, total);
     }
+
+    public void printLinks() {
+        System.out.println("http://localhost:8080/swagger-ui.html");
+        System.out.println("http://localhost:8080/check");
+        System.out.println("http://localhost:8080/products");
+        System.out.println("http://localhost:8080/sale");
+    }
 }
