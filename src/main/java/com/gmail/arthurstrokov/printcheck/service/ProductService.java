@@ -2,9 +2,9 @@ package com.gmail.arthurstrokov.printcheck.service;
 
 import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -17,16 +17,12 @@ import java.util.Map;
  * @author Arthur Strokov
  */
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
     private static final Logger log = LoggerFactory.getLogger(ProductService.class);
 
-    @Autowired
     private final ProductRepository productRepository;
-
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     /**
      * @param inputValuesList List with products

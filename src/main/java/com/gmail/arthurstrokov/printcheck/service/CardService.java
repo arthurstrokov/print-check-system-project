@@ -2,9 +2,9 @@ package com.gmail.arthurstrokov.printcheck.service;
 
 import com.gmail.arthurstrokov.printcheck.model.Card;
 import com.gmail.arthurstrokov.printcheck.repository.CardRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -18,16 +18,12 @@ import java.util.regex.Pattern;
  * @author Arthur Strokov
  */
 @Service
+@RequiredArgsConstructor
 public class CardService {
 
     private static final Logger log = LoggerFactory.getLogger(CardService.class);
 
-    @Autowired
     private final CardRepository cardRepository;
-
-    public CardService(CardRepository cardRepository) {
-        this.cardRepository = cardRepository;
-    }
 
     /**
      * @param checkInValues List where stored card discount id
