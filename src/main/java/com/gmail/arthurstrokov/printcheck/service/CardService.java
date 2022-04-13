@@ -20,9 +20,7 @@ import java.util.regex.Pattern;
 @Service
 @RequiredArgsConstructor
 public class CardService {
-
     private static final Logger log = LoggerFactory.getLogger(CardService.class);
-
     private final CardRepository cardRepository;
 
     /**
@@ -50,6 +48,26 @@ public class CardService {
                     log.error(String.format(e.getMessage(), "...Check input card value"));
                 }
             }
+        }
+        return cardDiscount;
+    }
+
+    /**
+     * @param presentedCard String where stored card discount id
+     * @return card discount
+     */
+    public BigDecimal getCardDiscount(String presentedCard) {
+        BigDecimal cardDiscount = BigDecimal.ZERO;
+        String[] part = presentedCard.split("-");
+        Card availableCard;
+        String cardId = "";
+        try {
+            cardId = part[1];
+            availableCard = cardRepository.findById(Long.parseLong(cardId));
+            cardDiscount = availableCard.getDiscount();
+        } catch (Exception e) {
+            log.error(String.format("There is no card id: %s", cardId));
+            log.error(String.format(e.getMessage(), "...Check input card value"));
         }
         return cardDiscount;
     }
