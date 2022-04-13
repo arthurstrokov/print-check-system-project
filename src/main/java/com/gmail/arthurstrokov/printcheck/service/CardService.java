@@ -44,8 +44,9 @@ public class CardService {
                     availableCard = cardRepository.findById(Long.parseLong(cardId));
                     cardDiscount = availableCard.getDiscount();
                 } catch (Exception e) {
-                    log.error(String.format("There is no card id: %s", cardId));
-                    log.error(String.format(e.getMessage(), "...Check input card value"));
+                    log.error("Check input card value.");
+                    log.error("There is no card id: {}", cardId);
+                    log.error(e.getMessage());
                 }
             }
         }
@@ -58,16 +59,17 @@ public class CardService {
      */
     public BigDecimal getCardDiscount(String presentedCard) {
         BigDecimal cardDiscount = BigDecimal.ZERO;
-        String[] part = presentedCard.split("-");
         Card availableCard;
         String cardId = "";
         try {
+            String[] part = presentedCard.split("-");
             cardId = part[1];
             availableCard = cardRepository.findById(Long.parseLong(cardId));
             cardDiscount = availableCard.getDiscount();
         } catch (Exception e) {
-            log.error(String.format("There is no card id: %s", cardId));
-            log.error(String.format(e.getMessage(), "...Check input card value"));
+            log.error("Check input card value.");
+            log.error("There is no card id: {}", cardId);
+            log.error(e.getMessage());
         }
         return cardDiscount;
     }
