@@ -27,6 +27,9 @@ public class PrintCheckService {
     private final ProductService productService;
     private final PrintService printService;
 
+    /**
+     * @param fileName name file with store values
+     */
     public void printCheckFromTxtFile(String fileName) {
         // Take values from file
         String input = inputService.readFromSomewhere(Path.of(fileName));
