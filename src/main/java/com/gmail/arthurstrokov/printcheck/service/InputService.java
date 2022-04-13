@@ -1,5 +1,7 @@
 package com.gmail.arthurstrokov.printcheck.service;
 
+import com.gmail.arthurstrokov.printcheck.model.PurchaseData;
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,23 @@ public class InputService {
             log.error("{} {}", e.getMessage(), "file does not exists");
         }
         return string;
+    }
+
+    /**
+     * Method that allowed get incoming values from Json file
+     *
+     * @return Check object with incoming values
+     */
+    public PurchaseData readFromJson(Path fileName) {
+        Gson gson = new Gson();
+        PurchaseData purchaseData = new PurchaseData();
+        try {
+            // 1. JSON file to Java object
+            purchaseData = gson.fromJson(Files.readString(fileName), PurchaseData.class);
+        } catch (IOException e) {
+            log.error("{} {}", e.getMessage(), "Something wrong here. You have to know input values format");
+        }
+        return purchaseData;
     }
 
     /**
