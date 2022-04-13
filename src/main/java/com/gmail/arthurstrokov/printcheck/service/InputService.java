@@ -31,7 +31,8 @@ public class InputService {
         try {
             string = Files.readString(fileName);
         } catch (IOException e) {
-            log.error("{} {}", e.getMessage(), "file does not exists");
+            log.error("File does not exists");
+            log.error(e.getMessage());
         }
         return string;
     }
@@ -48,7 +49,8 @@ public class InputService {
             // 1. JSON file to Java object
             purchaseData = gson.fromJson(Files.readString(fileName), PurchaseData.class);
         } catch (IOException e) {
-            log.error("{} {}", e.getMessage(), "Something wrong here. You have to know input values format");
+            log.error("Something wrong here. You have to know input values format");
+            log.error(e.getMessage());
         }
         return purchaseData;
     }
@@ -66,7 +68,8 @@ public class InputService {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             string = reader.readLine();
         } catch (IOException e) {
-            log.error("{} {}", e.getMessage(), "Something wrong here. You have to know input values format");
+            log.error("Something wrong here. You have to know input values format");
+            log.error(e.getMessage());
         }
         return string;
     }
