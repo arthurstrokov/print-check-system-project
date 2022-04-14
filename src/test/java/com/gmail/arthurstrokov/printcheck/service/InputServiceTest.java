@@ -18,24 +18,25 @@ class InputServiceTest {
 
     @BeforeEach
     void setUp() {
-        when(inputService.readFromSomewhere(any(Path.class))).thenReturn("4-3 4-6 2-1 9-2 8-4 8-5 1-4 2-6 3-12 card-4");
-        when(inputService.readFromSomewhere()).thenReturn("4-3 4-6 2-1 9-2 8-4 8-5 1-4 2-6 3-12 card-4");
+        when(inputService.readIncomingDataFromFile(any(Path.class))).thenReturn("4-3 4-6 2-1 9-2 8-4 8-5 1-4 2-6 3-12 card-4");
+        when(inputService.readIncomingDataFromSomewhere()).thenReturn("4-3 4-6 2-1 9-2 8-4 8-5 1-4 2-6 3-12 card-4");
     }
 
     @Test
     void readFromSomewhere() {
-        assertEquals("4-3 4-6 2-1 9-2 8-4 8-5 1-4 2-6 3-12 card-4", inputService.readFromSomewhere(Path.of("test.txt")));
-        assertNotEquals("4-3 4-6 2-1 9-2 8-", inputService.readFromSomewhere(Path.of("test.txt")));
-        assertNotNull(inputService.readFromSomewhere(Path.of("test.txt")));
+        Path of = Path.of("inputValues.txt");
+        assertEquals("4-3 4-6 2-1 9-2 8-4 8-5 1-4 2-6 3-12 card-4", inputService.readIncomingDataFromFile(of));
+        assertNotEquals("4-3 4-6 2-1 9-2 8-", inputService.readIncomingDataFromFile(of));
+        assertNotNull(inputService.readIncomingDataFromFile(of));
 
-        assertThrows(IOException.class, () -> Files.readString(Path.of("test.txt")));
+        assertThrows(IOException.class, () -> Files.readString(of));
     }
 
     @Test
     void testReadFromSomewhere() {
-        assertEquals("4-3 4-6 2-1 9-2 8-4 8-5 1-4 2-6 3-12 card-4", inputService.readFromSomewhere());
-        assertNotEquals("4-3 4-6 2-1 9-2 8-", inputService.readFromSomewhere());
-        assertNotNull(inputService.readFromSomewhere());
-        assertDoesNotThrow(() -> inputService.readFromSomewhere());
+        assertEquals("4-3 4-6 2-1 9-2 8-4 8-5 1-4 2-6 3-12 card-4", inputService.readIncomingDataFromSomewhere());
+        assertNotEquals("4-3 4-6 2-1 9-2 8-", inputService.readIncomingDataFromSomewhere());
+        assertNotNull(inputService.readIncomingDataFromSomewhere());
+        assertDoesNotThrow(() -> inputService.readIncomingDataFromSomewhere());
     }
 }
