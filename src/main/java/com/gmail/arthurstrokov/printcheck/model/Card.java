@@ -27,6 +27,15 @@ public class Card {
         this.discount = discount;
     }
 
+    private Card(Builder builder) {
+        setId(builder.id);
+        setDiscount(builder.discount);
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,5 +47,47 @@ public class Card {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    /**
+     * {@code Card} builder static inner class.
+     */
+    public static final class Builder {
+        private Long id;
+        private @NotNull BigDecimal discount;
+
+        private Builder() {
+        }
+
+        /**
+         * Sets the {@code id} and returns a reference to this Builder enabling method chaining.
+         *
+         * @param val the {@code id} to set
+         * @return a reference to this Builder
+         */
+        public Builder id(Long val) {
+            id = val;
+            return this;
+        }
+
+        /**
+         * Sets the {@code discount} and returns a reference to this Builder enabling method chaining.
+         *
+         * @param val the {@code discount} to set
+         * @return a reference to this Builder
+         */
+        public Builder discount(@NotNull BigDecimal val) {
+            discount = val;
+            return this;
+        }
+
+        /**
+         * Returns a {@code Card} built from the parameters previously set.
+         *
+         * @return a {@code Card} built with parameters of this {@code Card.Builder}
+         */
+        public Card build() {
+            return new Card(this);
+        }
     }
 }
