@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class HelpfulUtils {
+public class RandomData {
 
     private static Random random;
 
-    private HelpfulUtils() {
+    private RandomData() {
     }
 
     public static List<Card> randomCards() {
@@ -23,7 +23,9 @@ public class HelpfulUtils {
         Card card;
         random = new Random();
         for (long i = 0; i < 5; i++) {
-            card = new Card(BigDecimal.valueOf(random.nextInt(5) + 1L));
+            card = Card.newBuilder()
+                    .discount(BigDecimal.valueOf(random.nextInt(5) + 1L))
+                    .build();
             cards.add(card);
         }
         return cards;
@@ -34,11 +36,12 @@ public class HelpfulUtils {
         Product product;
         random = new Random();
         for (long i = 0; i < 10; i++) {
-            product = new Product(
-                    "Product " + i,
-                    BigDecimal.valueOf(random.nextInt(9) + 2L),
-                    BigDecimal.valueOf(Math.random()).setScale(2, RoundingMode.HALF_DOWN),
-                    random.nextInt(10) + 1);
+            product = Product.newBuilder()
+                    .productName("Product " + i)
+                    .productDiscountPercentage(BigDecimal.valueOf(random.nextInt(9) + 2L))
+                    .productPrice(BigDecimal.valueOf(Math.random()).setScale(2, RoundingMode.HALF_DOWN))
+                    .priceReduction(random.nextInt(10) + 1)
+                    .build();
             products.add(product);
         }
         return products;
