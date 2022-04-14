@@ -45,7 +45,8 @@ public class ProductService {
                     products.put(product, productSalesAmount);
                 }
             } catch (Exception e) {
-                log.error("{} {}", e.getMessage(), "...Check input values; in 'getProducts' method");
+                log.error("Check input values; in 'getProducts' method");
+                log.error(e.getMessage());
             }
         }
         return products;
