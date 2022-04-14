@@ -4,7 +4,6 @@ import com.gmail.arthurstrokov.printcheck.model.IncomingData;
 import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.model.Sale;
 import com.gmail.arthurstrokov.printcheck.publisher.EventManager;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ import java.util.Map;
  */
 @Service
 public class CheckService {
-    public EventManager eventManager;
+    private final EventManager eventManager;
     @Autowired
     private IncomingDataService incomingDataService;
     @Autowired
@@ -36,6 +35,10 @@ public class CheckService {
 
     public CheckService() {
         this.eventManager = new EventManager("JsonFile", "TxtFile");
+    }
+
+    public EventManager getEventManager() {
+        return eventManager;
     }
 
     /**
