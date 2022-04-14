@@ -41,7 +41,7 @@ public class PrintCheckApplication {
             // Create some Card/Product objects, add them in DB
             List<Card> cardList = RandomData.randomCards();
             List<Product> productList = RandomData.randomProducts();
-            // Save objects to DB
+            // Save objects in DB
             cardRepository.saveAll(cardList);
             productRepository.saveAll(productList);
             // Print check
