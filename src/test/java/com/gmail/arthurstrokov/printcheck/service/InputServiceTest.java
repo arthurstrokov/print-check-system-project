@@ -29,7 +29,7 @@ class InputServiceTest {
         assertNotEquals("4-3 4-6 2-1 9-2 8-", inputService.readIncomingDataFromFile(of));
         assertNotNull(inputService.readIncomingDataFromFile(of));
 
-        assertThrows(IOException.class, () -> Files.readString(of));
+        assertThrows(IOException.class, () -> Files.readString(Path.of("input.txt")));
     }
 
     @Test
