@@ -28,6 +28,7 @@ public class PrintCheckApplication {
     private final ProductRepository productRepository;
     private final CheckService checkService;
     private final PrintService printService;
+    private final JavaMailSenderService javaMailSenderService;
 
     public static void main(String[] args) {
         SpringApplication.run(PrintCheckApplication.class, args);
@@ -49,6 +50,8 @@ public class PrintCheckApplication {
             checkService.getPurchaseDataFromTxtFile("inputValues.txt");
             // Print links
             printService.printLinks();
+            // Send email
+            javaMailSenderService.sendEmail();
         };
     }
 }
