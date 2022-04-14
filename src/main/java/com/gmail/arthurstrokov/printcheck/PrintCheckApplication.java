@@ -45,7 +45,7 @@ public class PrintCheckApplication {
             productRepository.saveAll(productList);
             // Print check
             printCheckService.printCheckFromJsonFile("inputValues.json");
-            printCheckService.printCheckFromTxtFile("demo.txt");
+            printCheckService.printCheckFromTxtFile("inputValues.txt");
             // Print links
             printService.printLinks();
         };
