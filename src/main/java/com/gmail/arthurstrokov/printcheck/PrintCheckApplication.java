@@ -26,7 +26,7 @@ import java.util.*;
 public class PrintCheckApplication {
     private final CardRepository cardRepository;
     private final ProductRepository productRepository;
-    private final PrintCheckService printCheckService;
+    private final CheckService checkService;
     private final PrintService printService;
 
     public static void main(String[] args) {
@@ -45,8 +45,8 @@ public class PrintCheckApplication {
             cardRepository.saveAll(cardList);
             productRepository.saveAll(productList);
             // Print check
-            printCheckService.printCheckFromJsonFile("inputValues.json");
-            printCheckService.printCheckFromTxtFile("inputValues.txt");
+            checkService.getPurchaseDataFromJsonFile("inputValues.json");
+            checkService.getPurchaseDataFromTxtFile("inputValues.txt");
             // Print links
             printService.printLinks();
         };

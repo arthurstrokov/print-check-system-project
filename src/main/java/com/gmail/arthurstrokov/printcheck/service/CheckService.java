@@ -1,6 +1,6 @@
 package com.gmail.arthurstrokov.printcheck.service;
 
-import com.gmail.arthurstrokov.printcheck.model.PurchaseData;
+import com.gmail.arthurstrokov.printcheck.model.IncomingData;
 import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.model.Sale;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +20,8 @@ import java.util.Map;
  */
 @Service
 @RequiredArgsConstructor
-public class PrintCheckService {
-    private final InputService inputService;
+public class CheckService {
+    private final IncomingDataService incomingDataService;
     private final CardService cardService;
     private final SaleService saleCalculationService;
     private final ProductService productService;
@@ -30,9 +30,9 @@ public class PrintCheckService {
     /**
      * @param fileName name file with store values
      */
-    public void printCheckFromTxtFile(String fileName) {
+    public void getPurchaseDataFromTxtFile(String fileName) {
         // Take values from file
-        String input = inputService.readFromSomewhere(Path.of(fileName));
+        String input = incomingDataService.readIncomingDataFromFile(Path.of(fileName));
         // Add values to list
         List<String> inputValuesList = new ArrayList<>(Arrays.asList(input.split(" ")));
         // If card exists, get discount
@@ -50,13 +50,13 @@ public class PrintCheckService {
     /**
      * @param fileName name file with store values
      */
-    public void printCheckFromJsonFile(String fileName) {
+    public void getPurchaseDataFromJsonFile(String fileName) {
         // Take values from Json file
-        PurchaseData purchaseData = inputService.readFromJson(Path.of(fileName));
+        IncomingData incomingData = incomingDataService.readIncomingDataFromJson(Path.of(fileName));
         // Add values to list
-        List<String> inputValuesList = new ArrayList<>(purchaseData.getProducts());
+        List<String> inputValuesList = new ArrayList<>(incomingData.getProducts());
         // If card exists, get discount
-        BigDecimal cardDiscount = cardService.getCardDiscount(purchaseData.getCard());
+        BigDecimal cardDiscount = cardService.getCardDiscount(incomingData.getCard());
         // List size
         int sizeValuesList = inputValuesList.size();
         // Get products from order

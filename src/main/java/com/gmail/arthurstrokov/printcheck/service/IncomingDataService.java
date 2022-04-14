@@ -1,6 +1,6 @@
 package com.gmail.arthurstrokov.printcheck.service;
 
-import com.gmail.arthurstrokov.printcheck.model.PurchaseData;
+import com.gmail.arthurstrokov.printcheck.model.IncomingData;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,14 +19,14 @@ import java.nio.file.Path;
  * @author Arthur Strokov
  */
 @Service
-public class InputService {
-    private static final Logger log = LoggerFactory.getLogger(InputService.class);
+public class IncomingDataService {
+    private static final Logger log = LoggerFactory.getLogger(IncomingDataService.class);
 
     /**
      * @param fileName name file with store values
      * @return String with incoming values
      */
-    public String readFromSomewhere(Path fileName) {
+    public String readIncomingDataFromFile(Path fileName) {
         String string = "";
         try {
             string = Files.readString(fileName);
@@ -42,17 +42,17 @@ public class InputService {
      *
      * @return Check object with incoming values
      */
-    public PurchaseData readFromJson(Path fileName) {
+    public IncomingData readIncomingDataFromJson(Path fileName) {
         Gson gson = new Gson();
-        PurchaseData purchaseData = new PurchaseData();
+        IncomingData incomingData = new IncomingData();
         try {
             // 1. JSON file to Java object
-            purchaseData = gson.fromJson(Files.readString(fileName), PurchaseData.class);
+            incomingData = gson.fromJson(Files.readString(fileName), IncomingData.class);
         } catch (IOException e) {
             log.error("Something wrong here. You have to know input values format");
             log.error(e.getMessage());
         }
-        return purchaseData;
+        return incomingData;
     }
 
     /**
@@ -62,7 +62,7 @@ public class InputService {
      * @return String with incoming values
      * @deprecated
      */
-    public String readFromSomewhere() {
+    public String readIncomingDataFromSomewhere() {
         String string = "";
         System.out.println("Enter order: ");
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
