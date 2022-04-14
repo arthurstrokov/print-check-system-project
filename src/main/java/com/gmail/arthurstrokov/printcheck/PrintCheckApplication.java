@@ -4,7 +4,9 @@ import com.gmail.arthurstrokov.printcheck.model.Card;
 import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.repository.CardRepository;
 import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
-import com.gmail.arthurstrokov.printcheck.service.*;
+import com.gmail.arthurstrokov.printcheck.service.CheckService;
+import com.gmail.arthurstrokov.printcheck.service.JavaMailSenderService;
+import com.gmail.arthurstrokov.printcheck.service.PrintService;
 import com.gmail.arthurstrokov.printcheck.util.RandomData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -15,7 +17,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.List;
 
 /**
  * @author Arthur Strokov
@@ -46,12 +48,10 @@ public class PrintCheckApplication {
             cardRepository.saveAll(cardList);
             productRepository.saveAll(productList);
             // Print check
+            checkService.eventManager.subscribe("JsonFile", javaMailSenderService);
             checkService.getPurchaseDataFromJsonFile("inputValues.json");
-            checkService.getPurchaseDataFromTxtFile("inputValues.txt");
             // Print links
             printService.printLinks();
-            // Send email
-            javaMailSenderService.sendEmail();
         };
     }
 }

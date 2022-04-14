@@ -1,5 +1,6 @@
 package com.gmail.arthurstrokov.printcheck.service;
 
+import com.gmail.arthurstrokov.printcheck.publisher.EventListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.PropertySource;
@@ -11,10 +12,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 @PropertySource("classpath:application-mail.properties")
-public class JavaMailSenderService {
+public class JavaMailSenderService implements EventListener {
     private final JavaMailSender javaMailSender;
 
-    public void sendEmail() {
+    @Override
+    public void sendEmail(String eventType) {
 
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo("arthurstrokov@gmail.com", "arthurstrokov@yandex.ru");
@@ -25,5 +27,6 @@ public class JavaMailSenderService {
         log.info("Sending email");
         javaMailSender.send(msg);
         log.info("Email sent");
+        log.info(eventType);
     }
 }

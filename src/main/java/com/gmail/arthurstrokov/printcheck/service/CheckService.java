@@ -3,7 +3,9 @@ package com.gmail.arthurstrokov.printcheck.service;
 import com.gmail.arthurstrokov.printcheck.model.IncomingData;
 import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.model.Sale;
+import com.gmail.arthurstrokov.printcheck.publisher.EventManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -19,13 +21,22 @@ import java.util.Map;
  * @author Arthur Strokov
  */
 @Service
-@RequiredArgsConstructor
 public class CheckService {
-    private final IncomingDataService incomingDataService;
-    private final CardService cardService;
-    private final SaleService saleCalculationService;
-    private final ProductService productService;
-    private final PrintService printService;
+    public EventManager eventManager;
+    @Autowired
+    private IncomingDataService incomingDataService;
+    @Autowired
+    private CardService cardService;
+    @Autowired
+    private SaleService saleCalculationService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private PrintService printService;
+
+    public CheckService() {
+        this.eventManager = new EventManager("JsonFile", "TxtFile");
+    }
 
     /**
      * @param fileName name file with store values
@@ -45,6 +56,8 @@ public class CheckService {
         List<Sale> saleList = saleCalculationService.sale(products);
         // Print result both in console and file
         printService.totalCalculation(saleList, cardDiscount);
+
+        eventManager.notify("TxtFile");
     }
 
     /**
@@ -65,5 +78,7 @@ public class CheckService {
         List<Sale> saleList = saleCalculationService.sale(products);
         // Print result both in console and file
         printService.totalCalculation(saleList, cardDiscount);
+
+        eventManager.notify("JsonFile");
     }
 }
