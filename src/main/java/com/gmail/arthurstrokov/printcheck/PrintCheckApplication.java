@@ -38,9 +38,10 @@ public class PrintCheckApplication {
         return args -> {
             String fileName = "check.txt";
             Files.deleteIfExists(Path.of(fileName));
-            // Create some Card/Product objects, add them in H2 DB
+            // Create some Card/Product objects, add them in DB
             List<Card> cardList = RandomData.randomCards();
             List<Product> productList = RandomData.randomProducts();
+            // Save objects to DB
             cardRepository.saveAll(cardList);
             productRepository.saveAll(productList);
             // Print check
