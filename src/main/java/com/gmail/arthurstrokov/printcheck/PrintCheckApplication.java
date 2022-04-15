@@ -7,7 +7,7 @@ import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
 import com.gmail.arthurstrokov.printcheck.service.CheckService;
 import com.gmail.arthurstrokov.printcheck.service.JavaMailSenderService;
 import com.gmail.arthurstrokov.printcheck.service.PrintService;
-import com.gmail.arthurstrokov.printcheck.util.InitialData;
+import com.gmail.arthurstrokov.printcheck.util.InitialUtilsData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -42,8 +42,8 @@ public class PrintCheckApplication {
             String fileName = "check.txt";
             Files.deleteIfExists(Path.of(fileName));
             // Create some Card/Product objects, add them in DB
-            List<Card> cardList = InitialData.randomCards();
-            List<Product> productList = InitialData.randomProducts();
+            List<Card> cardList = InitialUtilsData.randomCards();
+            List<Product> productList = InitialUtilsData.randomProducts();
             // Save objects in DB
             cardRepository.saveAll(cardList);
             productRepository.saveAll(productList);

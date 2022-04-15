@@ -17,11 +17,11 @@ import java.util.Random;
  * @version 1.0
  */
 @Service
-public class InitialData {
+public class InitialUtilsData {
 
     private static Random random;
 
-    private InitialData() {
+    private InitialUtilsData() {
     }
 
     /**

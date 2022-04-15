@@ -1,7 +1,7 @@
 package com.gmail.arthurstrokov.printcheck.repository;
 
 import com.gmail.arthurstrokov.printcheck.model.Product;
-import com.gmail.arthurstrokov.printcheck.util.InitialData;
+import com.gmail.arthurstrokov.printcheck.util.InitialUtilsData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ class ProductRepositoryTest {
 
     ProductRepository productRepository = mock(ProductRepository.class);
 
-    List<Product> products = InitialData.randomProducts();
+    List<Product> products = InitialUtilsData.randomProducts();
 
     Product product = new Product();
 
