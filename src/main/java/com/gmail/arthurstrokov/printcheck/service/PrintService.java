@@ -1,5 +1,6 @@
 package com.gmail.arthurstrokov.printcheck.service;
 
+import com.gmail.arthurstrokov.printcheck.aspects.SendEmail;
 import com.gmail.arthurstrokov.printcheck.model.Sale;
 import org.springframework.stereotype.Service;
 
@@ -102,6 +103,7 @@ public class PrintService {
         printTotal(cardDiscount, cost, percent, total);
     }
 
+    @SendEmail
     public void printLinks() {
         System.out.println("http://localhost:8080/swagger-ui.html");
         System.out.println("http://localhost:8080/check");
