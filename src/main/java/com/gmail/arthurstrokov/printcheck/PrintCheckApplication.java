@@ -47,8 +47,9 @@ public class PrintCheckApplication {
             // Save objects in DB
             cardRepository.saveAll(cardList);
             productRepository.saveAll(productList);
-            // Print check
+            // Subscribe service for JsonFile event type
             checkService.getEventManager().subscribe("JsonFile", javaMailSenderService);
+            // Print check
             checkService.getPurchaseDataFromJsonFile("inputValues.json");
             // Print links
             printService.printLinks();

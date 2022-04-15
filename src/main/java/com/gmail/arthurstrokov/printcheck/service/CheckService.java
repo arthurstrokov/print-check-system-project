@@ -59,7 +59,7 @@ public class CheckService {
         List<Sale> saleList = saleCalculationService.sale(products);
         // Print result both in console and file
         printService.totalCalculation(saleList, cardDiscount);
-
+        // Notify that method has been executed
         eventManager.notify("TxtFile");
     }
 
@@ -81,7 +81,7 @@ public class CheckService {
         List<Sale> saleList = saleCalculationService.sale(products);
         // Print result both in console and file
         printService.totalCalculation(saleList, cardDiscount);
-
+        // Notify that method has been executed
         eventManager.notify("JsonFile");
     }
 }

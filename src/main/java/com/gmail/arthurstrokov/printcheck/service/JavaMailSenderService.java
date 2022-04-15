@@ -8,6 +8,13 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+/**
+ * Java mail service class
+ *
+ * @author Arthur Strokov
+ * @version 1.0
+ */
+
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -15,6 +22,11 @@ import org.springframework.stereotype.Service;
 public class JavaMailSenderService implements EventListener {
     private final JavaMailSender javaMailSender;
 
+    /**
+     * Method for sending emails
+     *
+     * @param eventType event name
+     */
     @Override
     public void sendEmail(String eventType) {
 
