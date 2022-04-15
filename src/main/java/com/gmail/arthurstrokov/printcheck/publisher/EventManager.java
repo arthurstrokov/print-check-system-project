@@ -19,6 +19,8 @@ public class EventManager {
 
     /**
      * Add new operations to Map
+     *
+     * @param operations operations
      */
     public EventManager(String... operations) {
         for (String operation : operations) {

@@ -41,6 +41,7 @@ public class IncomingDataService {
     /**
      * Method that allowed get incoming values from Json file
      *
+     * @param fileName fileName
      * @return Check object with incoming values
      */
     public IncomingData readIncomingDataFromJson(Path fileName) {
@@ -63,9 +64,10 @@ public class IncomingDataService {
      * @return String with incoming values
      * @deprecated
      */
+    @Deprecated(forRemoval = false)
     public String readIncomingDataFromSomewhere() {
         String string = "";
-        System.out.println("Enter order: ");
+        log.info("Enter order: ");
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             string = reader.readLine();
         } catch (IOException e) {
