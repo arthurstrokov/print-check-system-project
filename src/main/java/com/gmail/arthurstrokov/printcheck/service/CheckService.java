@@ -18,6 +18,7 @@ import java.util.Map;
  * Class that executes the receipt printing logic
  *
  * @author Arthur Strokov
+ * @version 1.0
  */
 @Service
 public class CheckService {

@@ -7,6 +7,10 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+/**
+ * @author Arthur Strokov
+ * @version 1.0
+ */
 @Getter
 @Setter
 @ToString

@@ -10,6 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Create some random data class
+ *
+ * @author Arthur Strokov
+ * @version 1.0
+ */
 @Service
 public class RandomData {
 
@@ -18,6 +24,11 @@ public class RandomData {
     private RandomData() {
     }
 
+    /**
+     * Create random cards
+     *
+     * @return cards
+     */
     public static List<Card> randomCards() {
         List<Card> cards = new ArrayList<>();
         Card card;
@@ -31,6 +42,11 @@ public class RandomData {
         return cards;
     }
 
+    /**
+     * Create random products
+     *
+     * @return products
+     */
     public static List<Product> randomProducts() {
         List<Product> products = new ArrayList<>();
         Product product;

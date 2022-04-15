@@ -14,6 +14,7 @@ import java.util.List;
  * Class that present service for printing check in file
  *
  * @author Arthur Strokov
+ * @version 1.0
  */
 @Service
 public class PrintService {

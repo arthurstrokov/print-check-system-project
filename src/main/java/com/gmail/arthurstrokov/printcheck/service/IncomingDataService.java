@@ -17,6 +17,7 @@ import java.nio.file.Path;
  * get incoming values from file or somewhere else
  *
  * @author Arthur Strokov
+ * @version 1.0
  */
 @Service
 public class IncomingDataService {

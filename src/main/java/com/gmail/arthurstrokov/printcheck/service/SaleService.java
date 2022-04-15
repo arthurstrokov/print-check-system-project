@@ -19,12 +19,12 @@ import java.util.Map;
  * Class that present sale calculation
  *
  * @author Arthur Strokov
+ * @version 1.0
  */
 @Service
 @RequiredArgsConstructor
 public class SaleService {
     private static final Logger log = LoggerFactory.getLogger(SaleService.class);
-
     private final SaleRepository saleRepository;
     private final SaleMDBRepository saleMDBRepository;
 

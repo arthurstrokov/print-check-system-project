@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
  * Class that allowed get card discount
  *
  * @author Arthur Strokov
+ * @version 1.0
  */
 @Service
 @RequiredArgsConstructor

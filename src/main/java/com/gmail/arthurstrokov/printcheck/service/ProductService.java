@@ -15,6 +15,7 @@ import java.util.Map;
  * Class that allowed get products
  *
  * @author Arthur Strokov
+ * @version 1.0
  */
 @Service
 @RequiredArgsConstructor
