@@ -1,5 +1,6 @@
 package com.gmail.arthurstrokov.printcheck.properties;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -18,10 +19,15 @@ public class EmailProperties {
     private String emailSubject;
     private String emailText;
 
+    @Autowired
     public EmailProperties(Environment environment) {
         this.environment = environment;
     }
 
+    /**
+     * Spring calls the methods annotated with @PostConstruct only once,
+     * just after the initialization of bean properties.
+     */
     @PostConstruct
     public void initialize() {
         this.emailSendAddress = environment.getProperty("email.send.address");
