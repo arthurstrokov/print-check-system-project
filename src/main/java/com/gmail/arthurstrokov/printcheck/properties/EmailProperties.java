@@ -5,6 +5,12 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * Java Email Properties class
+ *
+ * @author Arthur Strokov
+ * @version 1.0
+ */
 @Component
 public class EmailProperties {
     private final Environment environment;
