@@ -1,5 +1,6 @@
 package com.gmail.arthurstrokov.printcheck.service;
 
+import com.gmail.arthurstrokov.printcheck.properties.EmailProperties;
 import com.gmail.arthurstrokov.printcheck.publisher.EventListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 @PropertySource("classpath:application-mail.properties")
 public class JavaMailSenderService implements EventListener {
     private final JavaMailSender javaMailSender;
+    private final EmailProperties emailProperties;
 
     /**
      * Method for sending emails
@@ -29,12 +31,10 @@ public class JavaMailSenderService implements EventListener {
      */
     @Override
     public void sendEmail(String eventType) {
-
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("arthurstrokov@gmail.com", "arthurstrokov@yandex.ru");
-
-        msg.setSubject("Testing Spring Boot Print Check App");
-        msg.setText("Hello.\nCheck has been created.");
+        msg.setTo(emailProperties.getEmailSendAddress().split(" "));
+        msg.setSubject(emailProperties.getEmailSubject());
+        msg.setText(emailProperties.getEmailText());
 
         log.info("Sending email");
         javaMailSender.send(msg);
