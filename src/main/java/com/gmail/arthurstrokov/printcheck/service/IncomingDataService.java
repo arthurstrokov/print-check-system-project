@@ -2,7 +2,9 @@ package com.gmail.arthurstrokov.printcheck.service;
 
 import com.gmail.arthurstrokov.printcheck.model.IncomingData;
 import com.google.gson.Gson;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -20,7 +22,11 @@ import java.nio.file.Path;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class IncomingDataService {
+    private final Gson gson;
+    private IncomingData incomingData;
+
     /**
      * @param fileName name file with store values
      * @return String with incoming values
@@ -43,8 +49,6 @@ public class IncomingDataService {
      * @return Check object with incoming values
      */
     public IncomingData readIncomingDataFromJson(Path fileName) {
-        Gson gson = new Gson();
-        IncomingData incomingData = new IncomingData();
         try {
             // 1. JSON file to Java object
             incomingData = gson.fromJson(Files.readString(fileName), IncomingData.class);
