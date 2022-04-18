@@ -32,15 +32,16 @@ public class SendEmailAspect {
     @Around("@annotation(SendEmail)")
     public Object sendEmail(ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().getDeclaringTypeName();
-        log.info(methodName + " has been executed.");
+
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(emailProperties.getEmailSendAddress().split(" "));
         msg.setSubject(emailProperties.getEmailSubject());
-        msg.setText(emailProperties.getEmailText());
+        msg.setText(methodName + " has been executed.");
 
         log.info("Sending email");
         javaMailSender.send(msg);
         log.info("Email sent");
+        log.info(methodName + " has been executed.");
         return joinPoint.proceed();
     }
 }
