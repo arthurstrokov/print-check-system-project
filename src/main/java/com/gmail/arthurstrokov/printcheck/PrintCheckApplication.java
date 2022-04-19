@@ -50,7 +50,7 @@ public class PrintCheckApplication {
             // Subscribe service for JsonFile event type
             checkService.getEventManager().subscribe("JsonFile", javaMailSenderService);
             // Print check
-            checkService.getPurchaseDataFromJsonFile("inputValues.json");
+            checkService.createCheckFromJsonFilePurchaseData("inputValues.json");
             // Print links
             printService.printLinks();
         };

@@ -45,7 +45,7 @@ public class CheckService {
     /**
      * @param fileName name file with store values
      */
-    public void getPurchaseDataFromTxtFile(String fileName) {
+    public void createCheckFromTxtFilePurchaseData(String fileName) {
         // Take values from file
         String input = incomingDataService.readIncomingDataFromFile(Path.of(fileName));
         // Add values to list
@@ -67,7 +67,7 @@ public class CheckService {
     /**
      * @param fileName name file with store values
      */
-    public void getPurchaseDataFromJsonFile(String fileName) {
+    public void createCheckFromJsonFilePurchaseData(String fileName) {
         // Take values from Json file
         IncomingData incomingData = incomingDataService.readIncomingDataFromJson(Path.of(fileName));
         // Add values to list
