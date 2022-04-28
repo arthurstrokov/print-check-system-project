@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/print_check_app_db
+    username: root
+    password: root
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # Set database Schema
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect # SQL Dialect
+  show-sql: false # Show SQL
+  data:
+    mongodb:
+      database: check-app # MongoDB
+      port: 27017
+---
+properties:
+  hibernate:
+    format_sql: true # Pretty print the SQL

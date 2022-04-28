@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: development
+  main:
+    banner-mode: off # Set off banner
+    allow-bean-definition-overriding: true
+  jpa:
+    open-in-view: false # Swagger need disable OSIV (Open Session in View)
+  jackson:
+    serialization:
+      indent_output: true # Set pretty JSON response
+---
+logging:
+  level:
+    root: info
+---
+server:
+  error:
+    include-stacktrace: ON_PARAM # Remove 'trace' from Response body
