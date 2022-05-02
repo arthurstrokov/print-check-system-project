@@ -30,7 +30,7 @@ public class ProductService {
      * @param sizeValuesList  List size
      * @return counted products
      */
-    public Map<Product, Integer> getProducts(List<String> inputValuesList, Integer sizeValuesList) {
+    public Map<Product, Integer> getProducts(List<String> inputValuesList, int sizeValuesList) {
         Map<Product, Integer> products = new HashMap<>();
         for (int i = 0; i < sizeValuesList; i++) {
             String productInOrder = inputValuesList.get(i);

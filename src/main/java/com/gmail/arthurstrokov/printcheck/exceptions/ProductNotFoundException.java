@@ -8,7 +8,7 @@ package com.gmail.arthurstrokov.printcheck.exceptions;
  */
 public class ProductNotFoundException extends RuntimeException {
 
-    public ProductNotFoundException(Long id) {
+    public ProductNotFoundException(long id) {
         super("Could not find product " + id);
     }
 }

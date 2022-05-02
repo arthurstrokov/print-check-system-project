@@ -32,7 +32,7 @@ public class Product {
     @NotNull
     private Integer priceReduction; // Quantity at which a price reduction is possible
 
-    public Product(String productName, BigDecimal productDiscountPercentage, BigDecimal productPrice, Integer priceReduction) {
+    public Product(String productName, BigDecimal productDiscountPercentage, BigDecimal productPrice, int priceReduction) {
         this.productName = productName;
         this.productDiscountPercentage = productDiscountPercentage;
         this.productPrice = productPrice;
@@ -83,7 +83,7 @@ public class Product {
          * @param val the {@code id} to set
          * @return a reference to this Builder
          */
-        public Builder id(Long val) {
+        public Builder id(long val) {
             id = val;
             return this;
         }
@@ -127,7 +127,7 @@ public class Product {
          * @param val the {@code priceReduction} to set
          * @return a reference to this Builder
          */
-        public Builder priceReduction(@NotNull Integer val) {
+        public Builder priceReduction(@NotNull int val) {
             priceReduction = val;
             return this;
         }

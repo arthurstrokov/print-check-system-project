@@ -26,7 +26,7 @@ public class Sale {
     private BigDecimal productSalesTotalPrice;
     private Integer productSalesAmount;
 
-    public Sale(Product product, BigDecimal productSalesPrice, BigDecimal productSalesTotalPrice, Integer productSalesAmount) {
+    public Sale(Product product, BigDecimal productSalesPrice, BigDecimal productSalesTotalPrice, int productSalesAmount) {
         this.product = product;
         this.productSalesPrice = productSalesPrice;
         this.productSalesTotalPrice = productSalesTotalPrice;
@@ -77,7 +77,7 @@ public class Sale {
          * @param val the {@code id} to set
          * @return a reference to this Builder
          */
-        public Builder id(Long val) {
+        public Builder id(long val) {
             id = val;
             return this;
         }
@@ -121,7 +121,7 @@ public class Sale {
          * @param val the {@code productSalesAmount} to set
          * @return a reference to this Builder
          */
-        public Builder productSalesAmount(Integer val) {
+        public Builder productSalesAmount(int val) {
             productSalesAmount = val;
             return this;
         }
