@@ -69,7 +69,7 @@ public class Card {
          * @param val the {@code id} to set
          * @return a reference to this Builder
          */
-        public Builder id(Long val) {
+        public Builder id(long val) {
             id = val;
             return this;
         }
