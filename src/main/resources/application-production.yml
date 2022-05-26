@@ -10,11 +10,10 @@ spring:
       ddl-auto: create-drop # Set database Schema
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect # SQL Dialect
     show-sql: false # Show SQL
+    properties:
+      hibernate:
+        format_sql: true # Pretty print the SQL
   data:
     mongodb:
       database: check-app # MongoDB
       port: 27017
----
-properties:
-  hibernate:
-    format_sql: true # Pretty print the SQL

@@ -8,11 +8,10 @@ spring:
     show-sql: false # Show SQL
     hibernate:
       ddl-auto: create-drop # Set database Schema
+    properties:
+      hibernate:
+        format_sql: true # Pretty print the SQL
   data:
     mongodb:
       database: check-app # MongoDB
       port: 27017
----
-properties:
-  hibernate:
-    format_sql: true # Pretty print the SQL
