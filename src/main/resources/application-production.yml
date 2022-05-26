@@ -9,7 +9,7 @@ spring:
     hibernate:
       ddl-auto: create-drop # Set database Schema
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect # SQL Dialect
-  show-sql: false # Show SQL
+    show-sql: false # Show SQL
   data:
     mongodb:
       database: check-app # MongoDB

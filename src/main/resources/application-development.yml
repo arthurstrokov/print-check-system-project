@@ -5,13 +5,13 @@ spring:
     username: sa
     password:
   jpa:
+    show-sql: false # Show SQL
     hibernate:
       ddl-auto: create-drop # Set database Schema
-  show-sql: false # Show SQL
   data:
     mongodb:
       database: check-app # MongoDB
-    port: 27017
+      port: 27017
 ---
 properties:
   hibernate:
