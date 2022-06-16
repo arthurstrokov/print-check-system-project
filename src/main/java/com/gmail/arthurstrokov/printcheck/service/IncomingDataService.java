@@ -1,9 +1,9 @@
 package com.gmail.arthurstrokov.printcheck.service;
 
-import com.gmail.arthurstrokov.printcheck.model.PurchaseData;
+import com.gmail.arthurstrokov.printcheck.model.IncomingData;
 import com.google.gson.Gson;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -17,16 +17,20 @@ import java.nio.file.Path;
  * get incoming values from file or somewhere else
  *
  * @author Arthur Strokov
+ * @version 1.0
  */
+@Slf4j
 @Service
-public class InputService {
-    private static final Logger log = LoggerFactory.getLogger(InputService.class);
+@RequiredArgsConstructor
+public class IncomingDataService {
+    private final Gson gson;
+    private IncomingData incomingData;
 
     /**
      * @param fileName name file with store values
      * @return String with incoming values
      */
-    public String readFromSomewhere(Path fileName) {
+    public String readIncomingDataFromFile(Path fileName) {
         String string = "";
         try {
             string = Files.readString(fileName);
@@ -40,19 +44,18 @@ public class InputService {
     /**
      * Method that allowed get incoming values from Json file
      *
+     * @param fileName fileName
      * @return Check object with incoming values
      */
-    public PurchaseData readFromJson(Path fileName) {
-        Gson gson = new Gson();
-        PurchaseData purchaseData = new PurchaseData();
+    public IncomingData readIncomingDataFromJson(Path fileName) {
         try {
             // 1. JSON file to Java object
-            purchaseData = gson.fromJson(Files.readString(fileName), PurchaseData.class);
+            incomingData = gson.fromJson(Files.readString(fileName), IncomingData.class);
         } catch (IOException e) {
             log.error("Something wrong here. You have to know input values format");
             log.error(e.getMessage());
         }
-        return purchaseData;
+        return incomingData;
     }
 
     /**
@@ -62,9 +65,10 @@ public class InputService {
      * @return String with incoming values
      * @deprecated
      */
-    public String readFromSomewhere() {
+    @Deprecated(forRemoval = false)
+    public String readIncomingDataFromSomewhere() {
         String string = "";
-        System.out.println("Enter order: ");
+        log.info("Enter order: ");
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             string = reader.readLine();
         } catch (IOException e) {

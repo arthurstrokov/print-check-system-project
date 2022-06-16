@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author Arthur Strokov
+ * @version 1.0
+ */
 @Repository
 public interface CardRepository extends CrudRepository<Card, Long> {
 

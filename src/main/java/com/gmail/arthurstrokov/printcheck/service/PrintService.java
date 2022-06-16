@@ -1,6 +1,8 @@
 package com.gmail.arthurstrokov.printcheck.service;
 
+import com.gmail.arthurstrokov.printcheck.aspects.SendEmail;
 import com.gmail.arthurstrokov.printcheck.model.Sale;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
@@ -14,7 +16,9 @@ import java.util.List;
  * Class that present service for printing check in file
  *
  * @author Arthur Strokov
+ * @version 1.0
  */
+@Slf4j
 @Service
 public class PrintService {
     /**
@@ -101,10 +105,11 @@ public class PrintService {
         printTotal(cardDiscount, cost, percent, total);
     }
 
+    @SendEmail
     public void printLinks() {
-        System.out.println("http://localhost:8080/swagger-ui.html");
-        System.out.println("http://localhost:8080/check");
-        System.out.println("http://localhost:8080/products");
-        System.out.println("http://localhost:8080/sale");
+        log.info("http://localhost:8080/swagger-ui.html");
+        log.info("http://localhost:8080/check");
+        log.info("http://localhost:8080/products");
+        log.info("http://localhost:8080/sale");
     }
 }

@@ -5,8 +5,7 @@ import com.gmail.arthurstrokov.printcheck.model.Sale;
 import com.gmail.arthurstrokov.printcheck.repository.SaleMDBRepository;
 import com.gmail.arthurstrokov.printcheck.repository.SaleRepository;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -19,12 +18,12 @@ import java.util.Map;
  * Class that present sale calculation
  *
  * @author Arthur Strokov
+ * @version 1.0
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SaleService {
-    private static final Logger log = LoggerFactory.getLogger(SaleService.class);
-
     private final SaleRepository saleRepository;
     private final SaleMDBRepository saleMDBRepository;
 
@@ -40,7 +39,8 @@ public class SaleService {
                 Sale sale = saleProduct(product.getKey(), product.getValue());
                 saleList.add(sale);
             } catch (NullPointerException e) {
-                log.error("{} {}", e.getMessage(), "...Check input values; in 'sale' method; seems like you don't have product with it's id");
+                log.error("Check input values in 'sale' method. Seems like you don't have product with it's id");
+                log.error(e.getMessage());
             }
         }
         return saleList;

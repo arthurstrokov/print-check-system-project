@@ -3,6 +3,7 @@ package com.gmail.arthurstrokov.printcheck.service;
 import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,12 @@ import java.util.Map;
  * Class that allowed get products
  *
  * @author Arthur Strokov
+ * @version 1.0
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProductService {
-
-    private static final Logger log = LoggerFactory.getLogger(ProductService.class);
 
     private final ProductRepository productRepository;
 
@@ -29,7 +30,7 @@ public class ProductService {
      * @param sizeValuesList  List size
      * @return counted products
      */
-    public Map<Product, Integer> getProducts(List<String> inputValuesList, Integer sizeValuesList) {
+    public Map<Product, Integer> getProducts(List<String> inputValuesList, int sizeValuesList) {
         Map<Product, Integer> products = new HashMap<>();
         for (int i = 0; i < sizeValuesList; i++) {
             String productInOrder = inputValuesList.get(i);
@@ -45,7 +46,8 @@ public class ProductService {
                     products.put(product, productSalesAmount);
                 }
             } catch (Exception e) {
-                log.error("{} {}", e.getMessage(), "...Check input values; in 'getProducts' method");
+                log.error("Check input values; in 'getProducts' method");
+                log.error(e.getMessage());
             }
         }
         return products;

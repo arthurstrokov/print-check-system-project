@@ -3,6 +3,7 @@ package com.gmail.arthurstrokov.printcheck.service;
 import com.gmail.arthurstrokov.printcheck.model.Card;
 import com.gmail.arthurstrokov.printcheck.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,13 @@ import java.util.regex.Pattern;
  * Class that allowed get card discount
  *
  * @author Arthur Strokov
+ * @version 1.0
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CardService {
-    private static final Logger log = LoggerFactory.getLogger(CardService.class);
+
     private final CardRepository cardRepository;
 
     /**

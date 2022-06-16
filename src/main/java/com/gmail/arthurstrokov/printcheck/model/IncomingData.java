@@ -6,10 +6,14 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * @author Arthur Strokov
+ * @version 1.0
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class PurchaseData {
+public class IncomingData {
     private List<String> products;
     private String card;
 }
