@@ -1,6 +1,6 @@
 package com.gmail.arthurstrokov.printcheck.service;
 
-import com.gmail.arthurstrokov.printcheck.aspects.SendEmail;
+import com.gmail.arthurstrokov.printcheck.annotations.SendEmail;
 import com.gmail.arthurstrokov.printcheck.model.Sale;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

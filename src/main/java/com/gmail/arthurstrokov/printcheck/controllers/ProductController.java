@@ -1,6 +1,6 @@
 package com.gmail.arthurstrokov.printcheck.controllers;
 
-import com.gmail.arthurstrokov.printcheck.aspects.InspectingController;
+import com.gmail.arthurstrokov.printcheck.annotations.InspectingController;
 import com.gmail.arthurstrokov.printcheck.exceptions.ProductNotFoundException;
 import com.gmail.arthurstrokov.printcheck.model.Product;
 import com.gmail.arthurstrokov.printcheck.repository.ProductRepository;

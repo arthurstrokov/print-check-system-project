@@ -29,7 +29,7 @@ public class SendEmailAspect {
      *
      * @param joinPoint joinPoint
      */
-    @Around("@annotation(SendEmail)")
+    @Around("@annotation(com.gmail.arthurstrokov.printcheck.annotations.SendEmail)")
     public Object sendEmail(ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().getDeclaringTypeName();
 

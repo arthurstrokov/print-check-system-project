@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class InspectingControllerAspect {
 
-    @Around("@annotation(InspectingController)")
+    @Around("@annotation(com.gmail.arthurstrokov.printcheck.annotations.InspectingController)")
     public Object inspectController(ProceedingJoinPoint joinPoint) throws Throwable {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         log.info("Controller called from: {}", request.getRemoteHost());

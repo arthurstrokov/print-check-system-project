@@ -10,11 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 class PrintCheckApplicationTests {
 
-    @Autowired
-    PrintService printService;
-
     @Test
     void contextLoads() {
-        assertNotNull(printService);
     }
 }

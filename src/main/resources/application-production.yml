@@ -4,7 +4,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/print_check_app_db
     username: root
     password: root
-    initialization-mode: always
   jpa:
     hibernate:
       ddl-auto: create-drop # Set database Schema
@@ -17,3 +16,6 @@ spring:
     mongodb:
       database: check-app # MongoDB
       port: 27017
+  sql:
+    init:
+      mode: always

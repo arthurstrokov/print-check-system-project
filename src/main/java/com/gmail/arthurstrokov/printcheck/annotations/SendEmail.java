@@ -1,4 +1,4 @@
-package com.gmail.arthurstrokov.printcheck.aspects;
+package com.gmail.arthurstrokov.printcheck.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
